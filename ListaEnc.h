@@ -83,15 +83,18 @@ public:
     {
         if(cabeca == NULL)
             return true;
-        else{
+        else
+        {
             return false;
         }
     }
 
     //retorna elemento da posição x
-    int get(int x){
+    int get(int x)
+    {
         No* c = cabeca;
-        for(int i=0;i<x;i++){
+        for(int i=0; i<x; i++)
+        {
             c=c->obterProx();
         }
         return c->obterValor();
@@ -159,6 +162,44 @@ public:
             c = c->obterProx();
         }
         return false;
+    }
+    //Remove elemento da lista
+    int RemoveDado(int dado)
+    {
+        No *ptr, *antes;
+        if (cabeca==NULL)
+        {
+            return 0;  // Lista vazia !!!
+        }
+        else
+        {
+            ptr = cabeca;
+            antes = cabeca;
+            while (ptr !=NULL)
+            {
+                if (ptr->obterValor() == dado)
+                {
+                    if (ptr == cabeca)
+                    {
+                        cabeca = cabeca->obterProx();
+                        free(ptr);
+                        return 1;
+                    }
+                    else
+                    {
+                        antes->setProx(ptr->obterProx());
+                        free(ptr);
+                        return 1;
+                    }
+                }
+                else
+                {
+                    antes = ptr;
+                    ptr = ptr->obterProx();
+                }
+            }
+            return 0;
+        }
     }
 
     // remove da ListaEnc, remoção do final (semelhante a pop_back da list)

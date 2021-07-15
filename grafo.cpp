@@ -45,5 +45,13 @@ void grafo::adicionaAresta(int no1,int no2){
         vertices[no1].insereFinal(no2);
     }
 }
-void grafo::removeAresta(int no1,int no2){}
+void grafo::removeAresta(int no1,int no2){
+    if(vertices[no1].existe(no2)){
+        vertices[no1].RemoveDado(no2);
+        vertices[no2].RemoveDado(no1);
+    }
+    else{
+        cout<<"erro aresta nao existe";
+    }
+}
 bool existeAresta(int no1,int no2){}
