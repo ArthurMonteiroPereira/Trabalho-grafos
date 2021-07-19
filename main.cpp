@@ -7,21 +7,33 @@
 #include <iomanip>
 #include <string>
 #include <cstring>
-#include <list>
+#include <queue>
 
 using namespace std;
 
-typedef list<int, allocator<int> > ListInt;
+int main()
+{
+    /*int arnaldo=2;
+    grafo teste(10);
 
-void leArquivo(grafo *g){
+    teste.adicionaAresta(0,1);
+    teste.adicionaAresta(4,3);
+    teste.adicionaAresta(2,3);
+    teste.imprime();
+    teste.removeAresta(3,4);
+    teste.imprime();*/
+
+    cout << endl;
+    cout << "Inicio leitura do arquivo" << endl;
     ifstream arquivo;
     arquivo.open("teste.txt");
     if(!arquivo){
         abort();
     }
+    grafo *teste2;
     string linha;
     for(getline(arquivo, linha);!arquivo.eof();getline(arquivo, linha)){
-        ListInt lista;
+        queue<int> fila;
         string num = "";
         char aux;
         bool flag;
@@ -43,40 +55,30 @@ void leArquivo(grafo *g){
 
             else flag = true;
             if(!flag){
-            int n = num.length();
-            char *numero = new char[n+1];
-            strcpy(numero, num.c_str());
-            lista.insert(lista.end(), atoi(numero));
-            num = "";
+                int n = num.length(), m;
+                char *numero = new char[n];
+                strcpy(numero, num.c_str());
+                fila.push(atoi(numero));
+                num = "";
             }
         }
-        if(lista.max_size() == 1){
-            ListInt::iterator i = lista.begin();
-            cout << *i << "";
+
+            if(fila.size() == 1){
+                teste2 = new grafo(fila.front());
+                fila.pop();}
+            else {
+                int no1, no2;
+                no1 = fila.front();
+                fila.pop();
+                no2 = fila.front();
+                teste2->adicionaAresta(no1,no2);
+            }
+
         }
-        else
-        for(ListInt::iterator i = lista.begin(); i != lista.end(); ++i){
-                cout << *i << " ";
-        }
-        cout << endl;
-    }
+
     arquivo.close();
-}
-
-int main()
-{
-    int arnaldo=2;
-    grafo teste(10);
-
-    teste.adicionaAresta(0,1);
-    teste.adicionaAresta(4,3);
-    teste.adicionaAresta(2,3);
-    teste.imprime();
-    teste.removeAresta(3,4);
-    teste.imprime();
-
-    cout << endl;
-    grafo teste2(10);
-    leArquivo(&teste2);
+    teste2->imprime();
+    delete teste2;
+    cout << "Fim leitura do arquivo"<<endl;
     return 0;
 }
