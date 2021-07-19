@@ -39,3 +39,29 @@
 	<stdio.h>
 	"ListaEnc.h"
 
+1626719091 source:c:\users\malva\documents\github\trabalho-grafos\grafo.cpp
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	"grafo.h"
+
+1626719091 c:\users\malva\documents\github\trabalho-grafos\listaenc.h
+	<iostream>
+
+1626719091 c:\users\malva\documents\github\trabalho-grafos\grafo.h
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+
+1626719091 source:c:\users\malva\documents\github\trabalho-grafos\main.cpp
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	"grafo.h"
+	<fstream>
+	<cstdlib>
+	<iomanip>
+	<string>
+	<cstring>
+	<queue>
+
