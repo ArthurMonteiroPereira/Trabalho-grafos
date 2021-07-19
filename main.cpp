@@ -32,7 +32,8 @@ int main()
     }
     grafo *teste2;
     string linha;
-    for(getline(arquivo, linha);!arquivo.eof();getline(arquivo, linha)){
+    int l = 0;
+    for(getline(arquivo, linha);!arquivo.eof();getline(arquivo, linha), l++){
         queue<int> fila;
         string num = "";
         char aux;
@@ -49,11 +50,11 @@ int main()
                 num+=to_string(n);
             }
             j++;
-            if(j < linha.length()) aux = linha.at(j);
+            if(j < linha.length()) {aux = linha.at(j);}
 
-            if(aux == ' ' || j >= linha.length()) flag = false;
+            if(aux == ' ' || j >= linha.length()) {flag = false;}
 
-            else flag = true;
+            else {flag = true;}
             if(!flag){
                 int n = num.length(), m;
                 char *numero = new char[n];
@@ -73,12 +74,14 @@ int main()
                 no2 = fila.front();
                 teste2->adicionaAresta(no1,no2);
             }
-
+            cout << l << endl;
         }
 
     arquivo.close();
     teste2->imprime();
-    delete teste2;
+
     cout << "Fim leitura do arquivo"<<endl;
+    delete teste2;
+
     return 0;
 }
