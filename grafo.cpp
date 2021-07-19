@@ -34,15 +34,15 @@ void grafo::imprime(){
     }
 }
 void grafo::adicionaAresta(int no1,int no2){
-    if(no1>tamanho || no2>tamanho){
+    if(no1>=tamanho || no2>=tamanho){
         cout<<"error:VERTICES NAO PRESENTES"<<endl;
     }
     if(direcionado==1){
-        vertices[no1].insereFinal(no2);
+        vertices[no1].insereInicio(no2);
     }
     else{
-        vertices[no2].insereFinal(no1);
-        vertices[no1].insereFinal(no2);
+        vertices[no2].insereInicio(no1);
+        vertices[no1].insereInicio(no2);
     }
 }
 void grafo::removeAresta(int no1,int no2){

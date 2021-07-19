@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "ListaEnc.h"
 #include "grafo.h"
+//#include "grafo.cpp"
 #include <fstream>
 #include <cstdlib>
 #include <iomanip>
@@ -13,7 +14,7 @@ using namespace std;
 
 int main()
 {
-    /*int arnaldo=2;
+    int arnaldo=2;
     grafo teste(10);
 
     teste.adicionaAresta(0,1);
@@ -21,7 +22,7 @@ int main()
     teste.adicionaAresta(2,3);
     teste.imprime();
     teste.removeAresta(3,4);
-    teste.imprime();*/
+    teste.imprime();
 
     cout << endl;
     cout << "Inicio leitura do arquivo" << endl;
