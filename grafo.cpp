@@ -10,6 +10,7 @@ grafo::grafo(int edirecionado,int earestaPonderada,int epesoNosVertices,int tam)
     arestaPonderada=earestaPonderada;
     pesoNosVertices=epesoNosVertices;
     tamanho = tam;
+    vertices = new ListaEnc[tam];
 }
 grafo::grafo(int tam){
     direcionado=0;
