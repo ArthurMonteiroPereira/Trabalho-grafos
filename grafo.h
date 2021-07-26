@@ -21,4 +21,12 @@ public:
     void imprime();
     void adicionaAresta(int no1,int no2);
     void removeAresta(int no1,int no2);
+
+    ListaEnc *getVert()
+    {
+        return vertices;
+    }
+    int getTam() {
+        return tamanho;
+    }
 };
