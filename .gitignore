@@ -31,3 +31,6 @@
 *.out
 *.app
 *.json
+arquivo_saida.txt
+*.depend
+*.layout
