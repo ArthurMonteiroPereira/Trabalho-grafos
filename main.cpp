@@ -1,7 +1,8 @@
 #include <iostream>
 #include <stdio.h>
 #include "ListaEnc.h"
-#include "grafo.h"
+//#include "grafo.h"
+#include "grafo.cpp"
 #include <fstream>
 #include <cstdlib>
 #include <iomanip>

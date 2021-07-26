@@ -25,7 +25,7 @@
 	"ListaEnc.h"
 	"grafo.h"
 
-1626331067 source:c:\users\arthu\documents\github\trabalho-grafos\grafo.cpp
+1626725154 source:c:\users\arthu\documents\github\trabalho-grafos\grafo.cpp
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
@@ -38,4 +38,16 @@
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
+
+1626724978 source:c:\users\arthu\documents\github\trabalho-grafos\main.cpp
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	"grafo.h"
+	<fstream>
+	<cstdlib>
+	<iomanip>
+	<string>
+	<cstring>
+	<queue>
 
