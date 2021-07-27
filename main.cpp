@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdio.h>
 #include "ListaEnc.h"
-//#include "grafo.h"
-#include "grafo.cpp"
+#include "grafo.h"
+//#include "grafo.cpp"
 #include <fstream>
 #include <cstdlib>
 #include <iomanip>
@@ -74,7 +74,8 @@ grafo* leituraArquivo()
 
 int main(int argc, char ** argv)
 {
-    /*int arnaldo=2;
+    /*
+    int arnaldo=2;
     grafo teste(10);
 
     teste.adicionaAresta(0,1);
@@ -84,7 +85,11 @@ int main(int argc, char ** argv)
     teste.removeAresta(3,4);
     teste.imprime();
 
-    cout << endl;*/
+    cout << endl;
+    */
+
+
+
     grafo *teste2 = leituraArquivo();
     teste2->imprime();
     cout << "\t--/--"<<endl;
@@ -118,6 +123,5 @@ int main(int argc, char ** argv)
     saida.close();
     cout << "Fim escrita arquivo" << endl;
     delete teste2;
-
     return 0;
 }

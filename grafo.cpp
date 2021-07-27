@@ -25,6 +25,9 @@ grafo::grafo(int tam){
     vertices = new ListaEnc[tam];
 }
 grafo::~grafo(){
+    for(int i=0;i<tamanho;i++){
+        vertices[i].remover();
+    }
     delete []vertices;
     if(pesoNosVertices==1){
         delete []pesoV;

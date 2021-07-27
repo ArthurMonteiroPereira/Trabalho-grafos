@@ -13,6 +13,7 @@ private:
     int direcionado; //0=não direcionado,1=direcionado
     int arestaPonderada; //0=não ponderada,1=ponderada
     int pesoNosVertices; //0=sem peso,1=com peso
+    int *pesoV;
 public:
     grafo(int tam);
     grafo(int direcionado,int arestaPonderada,int pesoNosVertices,int tam);
@@ -21,12 +22,9 @@ public:
     void imprime();
     void adicionaAresta(int no1,int no2);
     void removeAresta(int no1,int no2);
+    void inserePesoVertice(int vert,int peso);
+    ListaEnc *getVert(){return vertices;}
+    int getTam() {return tamanho;}
+    void imprimeVerticePeso();
 
-    ListaEnc *getVert()
-    {
-        return vertices;
-    }
-    int getTam() {
-        return tamanho;
-    }
 };
