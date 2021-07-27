@@ -5,12 +5,17 @@
 #define T 10
 using namespace std;
 
-grafo::grafo(int edirecionado,int earestaPonderada,int epesoNosVertices,int tam){
-    direcionado=edirecionado;
-    arestaPonderada=earestaPonderada;
-    pesoNosVertices=epesoNosVertices;
+grafo::grafo(int eDirecionado,int eArestaPonderada,int ePesoNosVertices,int tam){
+    direcionado=eDirecionado;
+    arestaPonderada=eArestaPonderada;
+    pesoNosVertices=ePesoNosVertices;
     tamanho = tam;
     vertices = new ListaEnc[tam];
+    if(ePesoNosVertices==1){
+        pesoV = new int[tam];
+        for(int i=0;i<tam;i++)
+            pesoV[i]=0;
+    }
 }
 grafo::grafo(int tam){
     direcionado=0;
@@ -21,6 +26,9 @@ grafo::grafo(int tam){
 }
 grafo::~grafo(){
     delete []vertices;
+    if(pesoNosVertices==1){
+        delete []pesoV;
+    }
 }
 void grafo::imprime(){
     cout<<endl;
@@ -55,4 +63,15 @@ void grafo::removeAresta(int no1,int no2){
         cout<<"erro aresta nao existe";
     }
 }
+void grafo::inserePesoVertice(int vert,int peso){
+    pesoV[vert]=peso;
+}
+void grafo::imprimeVerticePeso(){
+    cout<<endl;
+    for(int i=0;i<tamanho;i++){
+        cout<<"vertice "<<i<<" pesa:"<<pesoV[i]<<endl;
+    }
+    cout<<endl;
+}
+
 bool existeAresta(int no1,int no2){}
