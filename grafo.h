@@ -29,5 +29,6 @@ public:
     void imprimeVerticePeso();
     void imprimeArestaPeso();
     void alteraPesoAresta(int no1,int no2,int peso);
+    int retornaPesoAresta(int no1,int no2);
 
 };

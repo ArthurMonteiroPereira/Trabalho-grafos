@@ -119,5 +119,8 @@ void grafo::alteraPesoAresta(int no1,int no2,int peso){
         vertices[no2].setPeso(vertices[no2].existeRetorna(no1),peso);
     }
 }
+int grafo::retornaPesoAresta(int no1,int no2){
+    return vertices[no1].getPeso(vertices[no1].existeRetorna(no2));
+}
 
 bool existeAresta(int no1,int no2){}

@@ -82,14 +82,15 @@ int main(int argc, char ** argv)
     teste.adicionaAresta(2,3);
     teste.adicionaArestaPeso(3,4,7);
     teste.imprimeArestaPeso();
-    teste.removeAresta(3,4);
+    //teste.removeAresta(3,4);
     teste.imprimeArestaPeso();
     teste.alteraPesoAresta(0,1,4);
     teste.imprimeArestaPeso();
     cout << endl;
+    cout <<teste.retornaPesoAresta(3,4)<<endl;
 
 
-/*
+
     grafo *teste2 = leituraArquivo();
     teste2->imprime();
     cout << "\t--/--"<<endl;
@@ -123,6 +124,6 @@ int main(int argc, char ** argv)
     saida.close();
     cout << "Fim escrita arquivo" << endl;
     delete teste2;
-*/
+
     return 0;
 }
