@@ -57,6 +57,22 @@ void grafo::adicionaAresta(int no1,int no2){
         vertices[no1].insereInicio(no2);
     }
 }
+void grafo::adicionaArestaPeso(int no1,int no2,int peso){
+    if(no1>=tamanho || no2>=tamanho){
+        cout<<"error:VERTICES NAO PRESENTES"<<endl;
+    }
+    if(direcionado==1){
+        vertices[no1].insereInicio(no2);
+        vertices[no1].setPeso(0,peso);
+    }
+    else{
+        vertices[no2].insereInicio(no1);
+        vertices[no2].setPeso(0,peso);
+        vertices[no1].insereInicio(no2);
+        vertices[no1].setPeso(0,peso);
+    }
+}
+
 void grafo::removeAresta(int no1,int no2){
     if(vertices[no1].existe(no2)){
         vertices[no1].RemoveDado(no2);
@@ -75,6 +91,33 @@ void grafo::imprimeVerticePeso(){
         cout<<"vertice "<<i<<" pesa:"<<pesoV[i]<<endl;
     }
     cout<<endl;
+}
+void grafo::imprimeArestaPeso(){
+    cout<<endl;
+    cout<<tamanho<<endl;
+    for(int i=0;i<tamanho;i++){
+        cout<<i<<" -- ";
+        if(!vertices[i].vazia()){
+            for(int z=0;z<vertices[i].tamanho();z++)
+                cout<<vertices[i].get(z)<<"("<<vertices[i].getPeso(z)<<")"<<" ,";
+        }
+    cout<<endl;
+    }
+
+}
+void grafo::alteraPesoAresta(int no1,int no2,int peso){
+    if(direcionado==1){
+        if(vertices[no1].existe(no2)){
+            vertices[no1].setPeso(vertices[no1].existeRetorna(no2),peso);
+        }
+        else{
+            cout<<"erro na alteração de peso da aresta,aresta não existe";
+        }
+    }
+    else{
+        vertices[no1].setPeso(vertices[no1].existeRetorna(no2),peso);
+        vertices[no2].setPeso(vertices[no2].existeRetorna(no1),peso);
+    }
 }
 
 bool existeAresta(int no1,int no2){}

@@ -12,11 +12,13 @@ class No
 private:
     int v;
     No* prox;
+    int peso;
 public:
     No(int v) // construtor
     {
         this->v = v;
         this->prox = NULL;
+        this->peso = 0;
     }
 
     int obterValor() // obtém o valor
@@ -32,6 +34,12 @@ public:
     void setProx(No* p) // seta o próximo No
     {
         prox = p;
+    }
+    void setPeso(int x){
+        peso=x;
+    }
+    int getPeso(){
+        return peso;
     }
 };
 
@@ -99,6 +107,24 @@ public:
         }
         return c->obterValor();
     }
+    int getPeso(int x)
+    {
+        No* c = cabeca;
+        for(int i=0; i<x; i++)
+        {
+            c=c->obterProx();
+        }
+        return c->getPeso();
+    }
+    void setPeso(int pos,int x)
+    {
+        No* c = cabeca;
+        for(int i=0; i<pos; i++)
+        {
+            c=c->obterProx();
+        }
+        c->setPeso(x);
+    }
     // insere no início (semelhante a push_front da list)
     void insereInicio(int v)
     {
@@ -163,6 +189,19 @@ public:
         }
         return false;
     }
+    int existeRetorna(int v)
+    {
+        int x=0;
+        No* c = cabeca;
+        while(c)
+        {
+            if(c->obterValor() == v)
+                return x;
+            x++;
+            c = c->obterProx();
+        }
+        return false;
+    }
     //Remove elemento da lista
     int RemoveDado(int dado)
     {
@@ -200,6 +239,32 @@ public:
             }
             return 0;
         }
+    }
+
+    void setPesoNoX(int dado,int x){
+        No *ptr, *antes;
+        if (cabeca==NULL)
+        {
+           cout<<"Lista vazia !!!||ERRO NO SET PESO DA LISTA ENC";
+        }
+        else
+        {
+            ptr = cabeca;
+            antes = cabeca;
+            while (ptr !=NULL)
+            {
+                if (ptr->obterValor() == dado)
+                {
+                    ptr->setPeso(x);
+                }
+                else
+                {
+                    antes = ptr;
+                    ptr = ptr->obterProx();
+                }
+            }
+        }
+
     }
 
     // remove da ListaEnc, remoção do final (semelhante a pop_back da list)

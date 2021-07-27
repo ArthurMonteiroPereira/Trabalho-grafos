@@ -21,10 +21,13 @@ public:
     bool existeAresta(int no1,int no2);
     void imprime();
     void adicionaAresta(int no1,int no2);
+    void adicionaArestaPeso(int no1,int no2,int peso);
     void removeAresta(int no1,int no2);
     void inserePesoVertice(int vert,int peso);
     ListaEnc *getVert(){return vertices;}
     int getTam() {return tamanho;}
     void imprimeVerticePeso();
+    void imprimeArestaPeso();
+    void alteraPesoAresta(int no1,int no2,int peso);
 
 };
