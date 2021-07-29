@@ -56,8 +56,8 @@ grafo* leituraArquivo()
 
 int main(int argc, char ** argv)
 {
-
     /*int arnaldo=2;
+
     grafo teste(1,1,1,10);
     teste.adicionaArestaPeso(0,1,6);
     teste.adicionaArestaPeso(4,3,3);
@@ -69,7 +69,9 @@ int main(int argc, char ** argv)
     teste.alteraPesoAresta(0,1,4);
     teste.imprimeArestaPeso();
     cout << endl;
+
     cout <<teste.retornaPesoAresta(3,4)<<endl;*/
+
 
 
 
