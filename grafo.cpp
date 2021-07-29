@@ -55,4 +55,13 @@ void grafo::removeAresta(int no1,int no2){
         cout<<"erro aresta nao existe";
     }
 }
-bool existeAresta(int no1,int no2){}
+
+ListaEnc* grafo::getVert()
+    {
+        return vertices;
+    }
+int grafo::getTam() {
+        return tamanho;
+    }
+
+//bool existeAresta(int no1,int no2){}
