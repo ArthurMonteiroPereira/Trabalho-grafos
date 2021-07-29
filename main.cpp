@@ -5,7 +5,6 @@
 //#include "grafo.cpp"
 #include <fstream>
 #include <cstdlib>
-#include <iomanip>
 #include <string>
 #include <cstring>
 #include <queue>
@@ -16,57 +15,40 @@ grafo* leituraArquivo()
 {
     cout << "Inicio leitura do arquivo" << endl;
     ifstream entrada;
-    grafo *g;
+    grafo *g = NULL;
     entrada.open("teste.txt");
     if(!entrada){
         abort();
     }
-    string linha;
-    int l = 0;
-    for(getline(entrada, linha);!entrada.eof();getline(entrada, linha), l++){
-        queue<int> fila;
-        string num = "";
-        char aux;
-        bool flag;
-        for(int j = 0,aux = linha.at(j);aux != '\n' && aux != NULL &&j < linha.length();){
-            int n;
-            if(aux == '-'){
-                j++;
-                aux = linha.at(j);
-                n = (-1)*(aux-'0');
+    queue<int> fila;
+    string numero = "";
+    for(string linha; getline(entrada,linha);){
+        int maxLin = strlen(linha.c_str());
+        char *c = new char[maxLin+1];
+        strcpy(c, linha.c_str());
+        for(int i = 0; i <= maxLin; i++){
+            while(c[i]!= ' ' && i <= maxLin){
+                numero += c[i];
+                i++;
             }
-            else n = (aux-'0');
-            if(n>=-9 && n <=9){
-                num+=to_string(n);
-            }
-            j++;
-            if(j < linha.length()) {aux = linha.at(j);}
-
-            if(aux == ' ' || j >= linha.length()) {flag = false;}
-
-            else {flag = true;}
-            if(!flag){
-                int n = num.length();
-                char *numero = new char[n];
-                strcpy(numero, num.c_str());
-                fila.push(atoi(numero));
-                num = "";
-            }
+            fila.push(atoi(numero.c_str()));
+            numero = "";
         }
-
-            if(fila.size() == 1){
-                g = new grafo(fila.front());
-                fila.pop();}
-            else {
-                int no1, no2;
-                no1 = fila.front();
-                fila.pop();
+        if(g == NULL){
+            g = new grafo(0,0,0,fila.front());
+            fila.pop();
+        }
+        else if(!fila.empty()){
+            int no1 = fila.front(), no2;
+            fila.pop();
+            while(!fila.empty())
+            {
                 no2 = fila.front();
-                fila.pop();
                 g->adicionaAresta(no1,no2);
+                fila.pop();
             }
-            cout << l << endl;
         }
+    }
     cout << "Fim leitura arquivo" << endl;
     entrada.close();
     return g;
@@ -74,8 +56,8 @@ grafo* leituraArquivo()
 
 int main(int argc, char ** argv)
 {
+    /*int arnaldo=2;
 
-    int arnaldo=2;
     grafo teste(1,1,1,10);
     teste.adicionaArestaPeso(0,1,6);
     teste.adicionaArestaPeso(4,3,3);
@@ -87,7 +69,9 @@ int main(int argc, char ** argv)
     teste.alteraPesoAresta(0,1,4);
     teste.imprimeArestaPeso();
     cout << endl;
-    cout <<teste.retornaPesoAresta(3,4)<<endl;
+
+    cout <<teste.retornaPesoAresta(3,4)<<endl;*/
+
 
 
 
@@ -97,7 +81,7 @@ int main(int argc, char ** argv)
 
     cout << "Inicio escrita arquivo" << endl;
     ofstream saida;
-    saida.open("Arquivo_Saida.txt");
+    saida.open("Saida.txt");
     if(saida.is_open())
     {
         saida << "Tamanho: " << teste2->getTam() << endl;
@@ -123,6 +107,7 @@ int main(int argc, char ** argv)
     else cout << "Problema ao criar arquivo" << endl;
     saida.close();
     cout << "Fim escrita arquivo" << endl;
+
     delete teste2;
 
     return 0;

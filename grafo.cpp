@@ -82,6 +82,16 @@ void grafo::removeAresta(int no1,int no2){
         cout<<"erro aresta nao existe";
     }
 }
+
+
+ListaEnc* grafo::getVert()
+    {
+        return vertices;
+    }
+int grafo::getTam() {
+        return tamanho;
+    }
+
 void grafo::inserePesoVertice(int vert,int peso){
     pesoV[vert]=peso;
 }
@@ -111,7 +121,7 @@ void grafo::alteraPesoAresta(int no1,int no2,int peso){
             vertices[no1].setPeso(vertices[no1].existeRetorna(no2),peso);
         }
         else{
-            cout<<"erro na alteração de peso da aresta,aresta não existe";
+            cout<<"erro na alteraÃ§Ã£o de peso da aresta,aresta nÃ£o existe";
         }
     }
     else{

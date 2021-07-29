@@ -10,8 +10,8 @@ class grafo
 private:
     ListaEnc *vertices;
     int tamanho;
-    int direcionado; //0=n„o direcionado,1=direcionado
-    int arestaPonderada; //0=n„o ponderada,1=ponderada
+    int direcionado; //0=n√£o direcionado,1=direcionado
+    int arestaPonderada; //0=n√£o ponderada,1=ponderada
     int pesoNosVertices; //0=sem peso,1=com peso
     int *pesoV;
 public:
@@ -31,4 +31,6 @@ public:
     void alteraPesoAresta(int no1,int no2,int peso);
     int retornaPesoAresta(int no1,int no2);
 
+    ListaEnc *getVert();
+    int getTam();
 };
