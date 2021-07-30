@@ -14,6 +14,8 @@ private:
     int arestaPonderada; //0=não ponderada,1=ponderada
     int pesoNosVertices; //0=sem peso,1=com peso
     int *pesoV;
+    void converteListaMatriz(int **matriz); //conerte a lista de adjacencia em uma matriz de adjacencia com o peso das arestas
+    void imprimeMatriz(); //função usada para testes internos
 public:
     grafo(int tam);
     grafo(int direcionado,int arestaPonderada,int pesoNosVertices,int tam);
@@ -30,7 +32,8 @@ public:
     void imprimeArestaPeso();
     void alteraPesoAresta(int no1,int no2,int peso);
     int retornaPesoAresta(int no1,int no2);
+    void letraD(int no1,int no2);
 
-    ListaEnc *getVert();
-    int getTam();
+
+
 };

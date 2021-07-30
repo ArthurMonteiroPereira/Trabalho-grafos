@@ -56,27 +56,25 @@ grafo* leituraArquivo()
 
 int main(int argc, char ** argv)
 {
-    /*int arnaldo=2;
+    int arnaldo=2;
 
-    grafo teste(1,1,1,10);
-    teste.adicionaArestaPeso(0,1,6);
-    teste.adicionaArestaPeso(4,3,3);
-    teste.adicionaAresta(2,3);
+    grafo teste(0,1,1,10);
+    teste.adicionaArestaPeso(0,5,7);
+    teste.adicionaArestaPeso(5,9,3);
+    teste.adicionaArestaPeso(2,3,7);
     teste.adicionaArestaPeso(3,4,7);
     teste.imprimeArestaPeso();
-    //teste.removeAresta(3,4);
-    teste.imprimeArestaPeso();
-    teste.alteraPesoAresta(0,1,4);
-    teste.imprimeArestaPeso();
     cout << endl;
+    cout << endl;
+    teste.letraD(0,9);
 
-    cout <<teste.retornaPesoAresta(3,4)<<endl;*/
 
 
 
 
     grafo *teste2 = leituraArquivo();
     teste2->imprime();
+
     cout << "\t--/--"<<endl;
 
     cout << "Inicio escrita arquivo" << endl;

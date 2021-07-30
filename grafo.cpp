@@ -3,6 +3,7 @@
 #include "ListaEnc.h"
 #include "grafo.h"
 #define T 10
+#define INFINITO 999999999
 using namespace std;
 
 grafo::grafo(int eDirecionado,int eArestaPonderada,int ePesoNosVertices,int tam){
@@ -83,15 +84,6 @@ void grafo::removeAresta(int no1,int no2){
     }
 }
 
-
-ListaEnc* grafo::getVert()
-    {
-        return vertices;
-    }
-int grafo::getTam() {
-        return tamanho;
-    }
-
 void grafo::inserePesoVertice(int vert,int peso){
     pesoV[vert]=peso;
 }
@@ -133,4 +125,85 @@ int grafo::retornaPesoAresta(int no1,int no2){
     return vertices[no1].getPeso(vertices[no1].existeRetorna(no2));
 }
 
+void grafo::converteListaMatriz(int **matriz){
+    for(int i=0;i<tamanho;i++){
+        for(int j=0;j<tamanho;j++){
+            matriz[i][j]=INFINITO;
+        }
+    }
+    for(int i=0;i<tamanho;i++){
+        for(int j=0;j<vertices[i].tamanho();j++){
+            matriz[i][vertices[i].get(j)]=vertices[i].getPeso(j);
+        }
+    }
+}
+
+void grafo::imprimeMatriz(){
+    int **matriz = new int*[tamanho];
+    for(int i=0;i<tamanho;i++){
+        matriz[i]= new int[tamanho];
+    }
+    converteListaMatriz(matriz);
+    for (int i=0;i<tamanho;i++) {
+        cout<<endl;
+        for (int j=0;j<tamanho;j++)
+            cout<<" "<<matriz[i][j];
+    }
+    cout<<endl;
+    for(int i=0;i<tamanho;i++){
+        delete[] matriz[i];
+    }
+    delete[] matriz;
+}
+
+void grafo::letraD(int no1,int no2){
+    ///////////alocando matrix de adjacencia///////////
+    int **matriz = new int*[tamanho];
+    for(int i=0;i<tamanho;i++){
+        matriz[i]= new int[tamanho];
+    }
+    converteListaMatriz(matriz);
+    ///////////////////criando matriz aux//////////////
+    int **aux = new int*[tamanho];
+    for(int i=0;i<tamanho;i++){
+        aux[i]= new int[tamanho];
+    }
+    //////////////////Algoritimo de Floyd-Warshall///////////////////////
+    for(int i=0;i<tamanho;i++){
+        for(int j=0;j<tamanho;j++){
+            if(matriz[i][j]<INFINITO){
+                aux[i][j]=i;
+            }
+        }
+    }
+    for(int k=0;k<tamanho;k++){
+        for(int i=0;i<tamanho;i++){
+            for(int j=0;j<tamanho;j++){
+                if(matriz[i][j]>matriz[i][k]+matriz[k][j]){
+                    matriz[i][j] = matriz[i][k] + matriz[k][j];
+                    aux[i][j]=aux[k][j];
+                }
+            }
+        }
+    }
+    ///////////////////////retorno////////////////////////////////////
+    if(matriz[no1][no2]>=INFINITO){
+        cout<<"letra D caminho nao existe"<<endl;
+    }
+    else{
+        cout<<endl;
+        cout<<"Letra D,para os nos "<<no1<<" e "<<no2<<":"<<matriz[no1][no2];
+        cout<<endl;
+    }
+    //////////////////desalocando matrix aux//////////////////////
+    for(int i=0;i<tamanho;i++){
+        delete[] aux[i];
+    }
+    delete[] aux;
+    ////////////////desalocando matriz principal/////////////////////////
+    for(int i=0;i<tamanho;i++){
+        delete[] matriz[i];
+    }
+    delete[] matriz;
+}
 bool existeAresta(int no1,int no2){}
