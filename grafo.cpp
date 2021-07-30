@@ -206,4 +206,6 @@ void grafo::letraD(int no1,int no2){
     }
     delete[] matriz;
 }
-bool existeAresta(int no1,int no2){}
+
+
+bool grafo::existeAresta(int no1,int no2){}

@@ -32,7 +32,8 @@ public:
     void imprimeArestaPeso();
     void alteraPesoAresta(int no1,int no2,int peso);
     int retornaPesoAresta(int no1,int no2);
-    void letraD(int no1,int no2);
+    void letraD(int no1,int no2); ////// https://pt.wikipedia.org/wiki/Algoritmo_de_Floyd-Warshall
+    void letraC(int no1,int no2);
 
 
 
