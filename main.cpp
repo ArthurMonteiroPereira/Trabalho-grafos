@@ -2,85 +2,110 @@
 #include <stdio.h>
 #include "ListaEnc.h"
 #include "grafo.h"
+//#include "grafo.cpp"
 #include <fstream>
 #include <cstdlib>
-#include <iomanip>
 #include <string>
 #include <cstring>
 #include <queue>
 
 using namespace std;
 
-int main()
+grafo* leituraArquivo()
 {
-    /*int arnaldo=2;
-    grafo teste(10);
-
-    teste.adicionaAresta(0,1);
-    teste.adicionaAresta(4,3);
-    teste.adicionaAresta(2,3);
-    teste.imprime();
-    teste.removeAresta(3,4);
-    teste.imprime();*/
-
-    cout << endl;
     cout << "Inicio leitura do arquivo" << endl;
-    ifstream arquivo;
-    arquivo.open("teste.txt");
-    if(!arquivo){
+    ifstream entrada;
+    grafo *g = NULL;
+    entrada.open("teste.txt");
+    if(!entrada){
         abort();
     }
-    grafo *teste2;
-    string linha;
-    int l = 0;
-    for(getline(arquivo, linha);!arquivo.eof();getline(arquivo, linha), l++){
-        queue<int> fila;
-        string num = "";
-        char aux;
-        bool flag;
-        for(int j = 0,aux = linha.at(j);aux != '\n' && aux != NULL &&j < linha.length();){
-            int n;
-            if(aux == '-'){
-                j++;
-                aux = linha.at(j);
-                n = (-1)*(aux-'0');
+    queue<int> fila;
+    string numero = "";
+    for(string linha; getline(entrada,linha);){
+        int maxLin = strlen(linha.c_str());
+        char *c = new char[maxLin+1];
+        strcpy(c, linha.c_str());
+        for(int i = 0; i <= maxLin; i++){
+            while(c[i]!= ' ' && i <= maxLin){
+                numero += c[i];
+                i++;
             }
-            else n = (aux-'0');
-            if(n>=-9 && n <=9){
-                num+=to_string(n);
-            }
-            j++;
-            if(j < linha.length()) {aux = linha.at(j);}
-
-            if(aux == ' ' || j >= linha.length()) {flag = false;}
-
-            else {flag = true;}
-            if(!flag){
-                int n = num.length(), m;
-                char *numero = new char[n];
-                strcpy(numero, num.c_str());
-                fila.push(atoi(numero));
-                num = "";
-            }
+            fila.push(atoi(numero.c_str()));
+            numero = "";
         }
-
-            if(fila.size() == 1){
-                teste2 = new grafo(fila.front());
-                fila.pop();}
-            else {
-                int no1, no2;
-                no1 = fila.front();
-                fila.pop();
+        if(g == NULL){
+            g = new grafo(0,0,0,fila.front());
+            fila.pop();
+        }
+        else if(!fila.empty()){
+            int no1 = fila.front(), no2;
+            fila.pop();
+            while(!fila.empty())
+            {
                 no2 = fila.front();
-                teste2->adicionaAresta(no1,no2);
+                g->adicionaAresta(no1,no2);
+                fila.pop();
             }
-            cout << l << endl;
         }
+    }
+    cout << "Fim leitura arquivo" << endl;
+    entrada.close();
+    return g;
+}
 
-    arquivo.close();
+int main(int argc, char ** argv)
+{
+    int arnaldo=2;
+
+    grafo teste(0,1,1,10);
+    teste.adicionaArestaPeso(0,5,7);
+    teste.adicionaArestaPeso(5,9,3);
+    teste.adicionaArestaPeso(2,3,7);
+    teste.adicionaArestaPeso(3,4,7);
+    teste.imprimeArestaPeso();
+    cout << endl;
+    cout << endl;
+    teste.letraD(0,9);
+
+
+
+
+
+    grafo *teste2 = leituraArquivo();
     teste2->imprime();
 
-    cout << "Fim leitura do arquivo"<<endl;
+    cout << "\t--/--"<<endl;
+
+    cout << "Inicio escrita arquivo" << endl;
+    ofstream saida;
+    saida.open("Saida.txt");
+    if(saida.is_open())
+    {
+        saida << "Tamanho: " << teste2->getTam() << endl;
+        ListaEnc *v = teste2->getVert();
+        for(int i = 0; i < teste2->getTam(); i++){
+            if(!v[i].vazia()){
+                cout << i << " -- ";
+                for(int k = 0, tam = v[i].tamanho(); k < tam; k++)
+                {
+                    int item = v[i].get(k);
+                    cout << item;
+                    saida << item;
+                    if(k != tam-1){
+                        cout << " --> ";
+                        saida << " --> ";
+                    }
+                }
+                cout << endl;
+                saida << endl;
+            }
+        }
+    }
+    else cout << "Problema ao criar arquivo" << endl;
+    saida.close();
+    cout << "Fim escrita arquivo" << endl;
+
     delete teste2;
 
     return 0;
