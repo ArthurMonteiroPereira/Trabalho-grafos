@@ -207,5 +207,9 @@ void grafo::letraD(int no1,int no2){
     delete[] matriz;
 }
 
+void grafo::letraC(int no1,int no2){
+
+
+}
 
 bool grafo::existeAresta(int no1,int no2){}
