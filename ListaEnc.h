@@ -296,5 +296,9 @@ public:
             }
         }
     }
+
+    No* getCabeca(){
+    return cabeca;
+    }
 };
 #endif
