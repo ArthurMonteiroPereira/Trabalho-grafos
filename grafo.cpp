@@ -4,6 +4,7 @@
 #include "grafo.h"
 #define T 10
 #define INFINITO 999999999
+#include <fstream>
 using namespace std;
 
 grafo::grafo(int eDirecionado,int eArestaPonderada,int ePesoNosVertices,int tam){
@@ -34,6 +35,60 @@ grafo::~grafo(){
         delete []pesoV;
     }
 }
+
+void grafo::imprimeEmDot(ofstream* saida){          //chamar para o grafo auxiliar
+    int isDir = getEhDirecionado();
+    int isPond = getTemArestaPonderada();
+    int hasPesoVert = getTemPesoNosVertices();
+
+    if(isDir)
+    {
+        *saida << "strict digraph {" << endl;
+    }
+
+    if(!isDir)
+    {
+        *saida << "strict graph {" << endl;
+    }
+
+    if(hasPesoVert)
+    {
+        for(int i=0; i < tamanho; i++)
+            if(!vertices[i].vazia())
+            {
+                for(int z=0;z<vertices[i].tamanho();z++)
+                    {
+                        *saida << i << "_p" << pesoV[i];
+                        if(isDir)
+                            *saida << "->";
+                        else
+                            *saida << "--";
+                        *saida << vertices[i].get(z) << endl;
+                    }
+            }
+    }
+
+    if(!hasPesoVert)
+    {
+                for(int i=0; i < tamanho; i++)
+            if(!vertices[i].vazia())
+            {
+                for(int z=0;z<vertices[i].tamanho();z++)
+                    {
+                        *saida << i;
+                        if(isDir)
+                            *saida << "->";
+                        else
+                            *saida << "--";
+                        *saida << vertices[i].get(z) << endl;
+                    }
+
+            }
+    }
+    *saida << "}";
+    return;
+}
+
 void grafo::imprime(){
     cout<<endl;
     cout<<tamanho<<endl;
@@ -213,3 +268,16 @@ void grafo::letraC(int no1,int no2){
 }
 
 bool grafo::existeAresta(int no1,int no2){}
+
+
+int grafo::getTemArestaPonderada(){
+    return arestaPonderada;
+}
+
+int grafo::getEhDirecionado(){
+    return direcionado;
+}
+
+int grafo::getTemPesoNosVertices(){
+    return pesoNosVertices;
+}

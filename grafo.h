@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "ListaEnc.h"
 #define T 10
+#include <fstream>
 using namespace std;
 
 
@@ -34,7 +35,8 @@ public:
     int retornaPesoAresta(int no1,int no2);
     void letraD(int no1,int no2); ////// https://pt.wikipedia.org/wiki/Algoritmo_de_Floyd-Warshall
     void letraC(int no1,int no2);
-
-
-
+    int getTemArestaPonderada();
+    int getEhDirecionado();
+    int getTemPesoNosVertices();
+    void imprimeEmDot(ofstream* saida);
 };
