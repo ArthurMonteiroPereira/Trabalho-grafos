@@ -38,5 +38,5 @@ public:
     int getTemArestaPonderada();
     int getEhDirecionado();
     int getTemPesoNosVertices();
-    void imprimeEmDot(ofstream* saida);
+    void imprimeEmDot(ofstream* saida,ListaEnc* solucao);
 };
