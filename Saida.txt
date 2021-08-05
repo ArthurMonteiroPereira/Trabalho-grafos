@@ -1,0 +1,14 @@
+strict graph {
+0--5[label =7]
+1
+2--3[label =7]
+3--4[label =7]
+3--2[label =7]
+4--3[label =7]
+5--9[label =3]
+5--0[label =7]
+6
+7
+8
+9--5[label =3]
+}

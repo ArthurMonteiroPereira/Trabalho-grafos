@@ -25,28 +25,29 @@
 	"ListaEnc.h"
 	"grafo.h"
 
-1627380144 source:c:\users\arthu\documents\github\trabalho-grafos\grafo.cpp
+1628193515 source:c:\users\arthu\documents\github\trabalho-grafos\grafo.cpp
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
 	"grafo.h"
+	<fstream>
 
-1627379817 c:\users\arthu\documents\github\trabalho-grafos\listaenc.h
+1628173219 c:\users\arthu\documents\github\trabalho-grafos\listaenc.h
 	<iostream>
 
-1627380144 c:\users\arthu\documents\github\trabalho-grafos\grafo.h
+1628173219 c:\users\arthu\documents\github\trabalho-grafos\grafo.h
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
+	<fstream>
 
-1627380261 source:c:\users\arthu\documents\github\trabalho-grafos\main.cpp
+1628193741 source:c:\users\arthu\documents\github\trabalho-grafos\main.cpp
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
 	"grafo.h"
 	<fstream>
 	<cstdlib>
-	<iomanip>
 	<string>
 	<cstring>
 	<queue>
