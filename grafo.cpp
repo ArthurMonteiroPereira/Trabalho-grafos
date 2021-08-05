@@ -58,12 +58,12 @@ void grafo::imprimeEmDot(ofstream* saida){          //chamar para o grafo auxili
             {
                 for(int z=0;z<vertices[i].tamanho();z++)
                     {
-                        *saida << i+1 << "_p" << pesoV[i];
+                        *saida << i << "_p" << pesoV[i];
                         if(isDir)
                             *saida << "->";
                         else
                             *saida << "--";
-                        *saida << (vertices[i].get(z))+1 << endl;
+                        *saida << vertices[i].get(z) << endl;
                     }
             }
     }
@@ -75,12 +75,12 @@ void grafo::imprimeEmDot(ofstream* saida){          //chamar para o grafo auxili
             {
                 for(int z=0;z<vertices[i].tamanho();z++)
                     {
-                        *saida << i+1;
+                        *saida << i;
                         if(isDir)
                             *saida << "->";
                         else
                             *saida << "--";
-                        *saida << (vertices[i].get(z))+1 << endl;
+                        *saida << vertices[i].get(z) << endl;
                     }
 
             }
@@ -102,8 +102,6 @@ void grafo::imprime(){
     }
 }
 void grafo::adicionaAresta(int no1,int no2){
-    no1--;
-    no2--;
     if(no1>=tamanho || no2>=tamanho){
         cout<<"error:VERTICES NAO PRESENTES"<<endl;
     }
@@ -116,8 +114,6 @@ void grafo::adicionaAresta(int no1,int no2){
     }
 }
 void grafo::adicionaArestaPeso(int no1,int no2,int peso){
-    no1--;
-    no2--;
     if(no1>=tamanho || no2>=tamanho){
         cout<<"error:VERTICES NAO PRESENTES"<<endl;
     }
@@ -134,8 +130,6 @@ void grafo::adicionaArestaPeso(int no1,int no2,int peso){
 }
 
 void grafo::removeAresta(int no1,int no2){
-    no1--;
-    no2--;
     if(vertices[no1].existe(no2)){
         vertices[no1].RemoveDado(no2);
         vertices[no2].RemoveDado(no1);
@@ -146,13 +140,12 @@ void grafo::removeAresta(int no1,int no2){
 }
 
 void grafo::inserePesoVertice(int vert,int peso){
-    vert--;
     pesoV[vert]=peso;
 }
 void grafo::imprimeVerticePeso(){
     cout<<endl;
     for(int i=0;i<tamanho;i++){
-        cout<<"vertice "<<i+1<<" pesa:"<<pesoV[i]<<endl;
+        cout<<"vertice "<<i<<" pesa:"<<pesoV[i]<<endl;
     }
     cout<<endl;
 }
@@ -170,8 +163,6 @@ void grafo::imprimeArestaPeso(){
 
 }
 void grafo::alteraPesoAresta(int no1,int no2,int peso){
-    no1--;
-    no2--;
     if(direcionado==1){
         if(vertices[no1].existe(no2)){
             vertices[no1].setPeso(vertices[no1].existeRetorna(no2),peso);
@@ -186,8 +177,6 @@ void grafo::alteraPesoAresta(int no1,int no2,int peso){
     }
 }
 int grafo::retornaPesoAresta(int no1,int no2){
-    no1--;
-    no2--;
     return vertices[no1].getPeso(vertices[no1].existeRetorna(no2));
 }
 
@@ -223,8 +212,6 @@ void grafo::imprimeMatriz(){
 }
 
 void grafo::letraD(int no1,int no2){
-    no1--;
-    no2--;
     ///////////alocando matrix de adjacencia///////////
     int **matriz = new int*[tamanho];
     for(int i=0;i<tamanho;i++){
@@ -260,7 +247,7 @@ void grafo::letraD(int no1,int no2){
     }
     else{
         cout<<endl;
-        cout<<"Letra D,para os nos "<<no1+1<<" e "<<no2+1<<":"<<matriz[no1][no2];
+        cout<<"Letra D,para os nos "<<no1<<" e "<<no2<<":"<<matriz[no1][no2];
         cout<<endl;
     }
     //////////////////desalocando matrix aux//////////////////////
