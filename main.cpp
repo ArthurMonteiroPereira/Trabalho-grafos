@@ -16,10 +16,14 @@ grafo* leituraArquivo()
     cout << "Inicio leitura do arquivo" << endl;
     ifstream entrada;
     grafo *g = NULL;
-    entrada.open("teste.txt");
+    string arq;
+    cout << "Digite o nome do arquivo com sua path: " << endl;
+    cin >> arq;
+    entrada.open(arq.c_str());
     if(!entrada){
         abort();
     }
+    int direcionado, ponderado, peso;
     queue<int> fila;
     string numero = "";
     for(string linha; getline(entrada,linha);){
@@ -35,7 +39,16 @@ grafo* leituraArquivo()
             numero = "";
         }
         if(g == NULL){
-            g = new grafo(0,0,0,fila.front());
+            cout << "Grafo direcionado? Sim = 1 / Nao = 0" << endl;
+            cin >> direcionado;
+            cout << endl;
+            cout << "Arestas Ponderadas? Sim = 1 / Nao = 0" << endl;
+            cin >> ponderado;
+            cout << endl;
+            cout << "Pesos nos vertices? Sim = 1 / Nao = 0" << endl;
+            cin >> peso;
+            cout << endl;
+            g = new grafo(direcionado,ponderado,peso,fila.front());
             fila.pop();
         }
         else if(!fila.empty()){
@@ -56,27 +69,25 @@ grafo* leituraArquivo()
 
 int main(int argc, char ** argv)
 {
-    /*int arnaldo=2;
+    int arnaldo=2;
 
-    grafo teste(1,1,1,10);
-    teste.adicionaArestaPeso(0,1,6);
-    teste.adicionaArestaPeso(4,3,3);
-    teste.adicionaAresta(2,3);
+    grafo teste(0,1,1,10);
+    teste.adicionaArestaPeso(0,5,7);
+    teste.adicionaArestaPeso(5,9,3);
+    teste.adicionaArestaPeso(2,3,7);
     teste.adicionaArestaPeso(3,4,7);
     teste.imprimeArestaPeso();
-    //teste.removeAresta(3,4);
-    teste.imprimeArestaPeso();
-    teste.alteraPesoAresta(0,1,4);
-    teste.imprimeArestaPeso();
     cout << endl;
+    cout << endl;
+    teste.letraD(0,9);
 
-    cout <<teste.retornaPesoAresta(3,4)<<endl;*/
 
 
 
 
     grafo *teste2 = leituraArquivo();
     teste2->imprime();
+
     cout << "\t--/--"<<endl;
 
     cout << "Inicio escrita arquivo" << endl;
@@ -84,7 +95,8 @@ int main(int argc, char ** argv)
     saida.open("Saida.txt");
     if(saida.is_open())
     {
-        saida << "Tamanho: " << teste2->getTam() << endl;
+        teste2->imprimeEmDot(&saida);
+        /*saida << "Tamanho: " << teste2->getTam() << endl;
         ListaEnc *v = teste2->getVert();
         for(int i = 0; i < teste2->getTam(); i++){
             if(!v[i].vazia()){
@@ -102,11 +114,16 @@ int main(int argc, char ** argv)
                 cout << endl;
                 saida << endl;
             }
-        }
+        }*/
     }
     else cout << "Problema ao criar arquivo" << endl;
     saida.close();
     cout << "Fim escrita arquivo" << endl;
+
+    if(teste.getTemArestaPonderada() == 0)
+    {
+        cout << "deu";
+    }
 
     delete teste2;
 
