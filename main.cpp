@@ -58,12 +58,12 @@ int main(int argc, char ** argv)
 {
     int arnaldo=2;
 
-    grafo teste(0,1,1,10);
+    grafo teste(0,1,0,10);
     teste.adicionaArestaPeso(0,5,7);
     teste.adicionaArestaPeso(5,9,3);
     teste.adicionaArestaPeso(2,3,7);
     teste.adicionaArestaPeso(3,4,7);
-    teste.imprimeArestaPeso();
+    //teste.imprimeArestaPeso();
     cout << endl;
     cout << endl;
     teste.letraD(0,9);
@@ -73,7 +73,7 @@ int main(int argc, char ** argv)
 
 
     grafo *teste2 = leituraArquivo();
-    teste2->imprime();
+    //teste2->imprime();
 
     cout << "\t--/--"<<endl;
 
@@ -82,7 +82,8 @@ int main(int argc, char ** argv)
     saida.open("Saida.txt");
     if(saida.is_open())
     {
-        teste2->imprimeEmDot(&saida);
+        //teste2->imprimeEmDot(&saida);
+        teste.imprimeEmDot(&saida);
         /*saida << "Tamanho: " << teste2->getTam() << endl;
         ListaEnc *v = teste2->getVert();
         for(int i = 0; i < teste2->getTam(); i++){
