@@ -36,7 +36,7 @@ grafo::~grafo(){
     }
 }
 
-void grafo::imprimeEmDot(ofstream* saida/*recebe também o vetor solução*/){          //chamar para o grafo auxiliar
+void grafo::imprimeEmDot(ofstream* saida, ListaEnc* solucao){ // Mudar pra abrir o arquivo de saida aqui dentro mesmo
     int isDir = getEhDirecionado();
     int isPond = getTemArestaPonderada();
     int hasPesoVert = getTemPesoNosVertices();
@@ -54,9 +54,9 @@ void grafo::imprimeEmDot(ofstream* saida/*recebe também o vetor solução*/){  
     if(hasPesoVert)
     {
         for(int i=0; i < tamanho; i++)
-            if(!vertices[i].vazia())
+            if(solucao->existe(i))
             {
-                for(int z=0;z<vertices[i].tamanho();z++)
+                for(int z=0;z<vertices[i].tamanho()&&solucao->existe(z);z++)
                     {
                         *saida << i << "_p" << pesoV[i];
                         if(isDir)
@@ -76,9 +76,9 @@ void grafo::imprimeEmDot(ofstream* saida/*recebe também o vetor solução*/){  
     if(!hasPesoVert)
     {
                 for(int i=0; i < tamanho; i++)
-            if(!vertices[i].vazia())
+            if(solucao->existe(i))
             {
-                for(int z=0;z<vertices[i].tamanho();z++)
+                for(int z=0;z<vertices[i].tamanho()&&solucao->existe(i);z++)
                     {
                         *saida << i;
                         if(isDir)
