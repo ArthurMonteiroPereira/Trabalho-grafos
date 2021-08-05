@@ -82,27 +82,8 @@ int main(int argc, char ** argv)
     saida.open("Saida.txt");
     if(saida.is_open())
     {
-        //teste2->imprimeEmDot(&saida);
         teste.imprimeEmDot(&saida);
-        /*saida << "Tamanho: " << teste2->getTam() << endl;
-        ListaEnc *v = teste2->getVert();
-        for(int i = 0; i < teste2->getTam(); i++){
-            if(!v[i].vazia()){
-                cout << i << " -- ";
-                for(int k = 0, tam = v[i].tamanho(); k < tam; k++)
-                {
-                    int item = v[i].get(k);
-                    cout << item;
-                    saida << item;
-                    if(k != tam-1){
-                        cout << " --> ";
-                        saida << " --> ";
-                    }
-                }
-                cout << endl;
-                saida << endl;
-            }
-        }*/
+
     }
     else cout << "Problema ao criar arquivo" << endl;
     saida.close();
