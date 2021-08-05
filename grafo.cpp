@@ -36,7 +36,7 @@ grafo::~grafo(){
     }
 }
 
-void grafo::imprimeEmDot(ofstream* saida){          //chamar para o grafo auxiliar
+void grafo::imprimeEmDot(ofstream* saida/*recebe também o vetor solução*/){          //chamar para o grafo auxiliar
     int isDir = getEhDirecionado();
     int isPond = getTemArestaPonderada();
     int hasPesoVert = getTemPesoNosVertices();
@@ -63,9 +63,14 @@ void grafo::imprimeEmDot(ofstream* saida){          //chamar para o grafo auxili
                             *saida << "->";
                         else
                             *saida << "--";
-                        *saida << vertices[i].get(z) << endl;
+                        *saida << vertices[i].get(z);
+                        if(isPond)
+                            *saida << "[label =" << retornaPesoAresta(i,vertices[i].get(z)) << "]" <<endl;
+
                     }
             }
+            else
+                *saida << i << endl;
     }
 
     if(!hasPesoVert)
@@ -80,10 +85,14 @@ void grafo::imprimeEmDot(ofstream* saida){          //chamar para o grafo auxili
                             *saida << "->";
                         else
                             *saida << "--";
-                        *saida << vertices[i].get(z) << endl;
+                        *saida << vertices[i].get(z);
+                        if(isPond)
+                            *saida << "[label =" << retornaPesoAresta(i,vertices[i].get(z)) << "]" <<endl;
                     }
 
             }
+            else
+                *saida << i << endl;
     }
     *saida << "}";
     return;
@@ -281,3 +290,4 @@ int grafo::getEhDirecionado(){
 int grafo::getTemPesoNosVertices(){
     return pesoNosVertices;
 }
+

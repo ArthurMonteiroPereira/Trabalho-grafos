@@ -16,7 +16,7 @@ grafo* leituraArquivo()
     cout << "Inicio leitura do arquivo" << endl;
     ifstream entrada;
     grafo *g = NULL;
-    entrada.open("teste.txt");
+    entrada.open("grafo_125.txt");
     if(!entrada){
         abort();
     }
@@ -35,7 +35,7 @@ grafo* leituraArquivo()
             numero = "";
         }
         if(g == NULL){
-            g = new grafo(0,0,0,fila.front());
+            g = new grafo(0,1,0,fila.front());
             fila.pop();
         }
         else if(!fila.empty()){
