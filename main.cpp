@@ -59,14 +59,14 @@ int main(int argc, char ** argv)
     int arnaldo=2;
 
     grafo teste(0,1,1,10);
-    teste.adicionaArestaPeso(0,5,7);
+    teste.adicionaArestaPeso(1,5,7);
     teste.adicionaArestaPeso(5,9,3);
     teste.adicionaArestaPeso(2,3,7);
     teste.adicionaArestaPeso(3,4,7);
     teste.imprimeArestaPeso();
     cout << endl;
     cout << endl;
-    teste.letraD(0,9);
+    teste.letraD(1,9);
 
 
 
