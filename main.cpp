@@ -8,54 +8,61 @@
 #include <string>
 #include <cstring>
 #include <queue>
-
+#include "criarArquivo.h"
 using namespace std;
 
-grafo* leituraArquivo()
-{
-    cout << "Inicio leitura do arquivo" << endl;
-    ifstream entrada;
-    grafo *g = NULL;
-    entrada.open("grafo_125.txt");
-    if(!entrada){
-        abort();
-    }
-    queue<int> fila;
-    string numero = "";
-    for(string linha; getline(entrada,linha);){
-        int maxLin = strlen(linha.c_str());
-        char *c = new char[maxLin+1];
-        strcpy(c, linha.c_str());
-        for(int i = 0; i <= maxLin; i++){
-            while(c[i]!= ' ' && i <= maxLin){
-                numero += c[i];
-                i++;
-            }
-            fila.push(atoi(numero.c_str()));
-            numero = "";
-        }
-        if(g == NULL){
-            g = new grafo(0,1,0,fila.front());
-            fila.pop();
-        }
-        else if(!fila.empty()){
-            int no1 = fila.front(), no2;
-            fila.pop();
-            while(!fila.empty())
-            {
-                no2 = fila.front();
-                g->adicionaAresta(no1,no2);
-                fila.pop();
-            }
-        }
-    }
-    cout << "Fim leitura arquivo" << endl;
-    entrada.close();
-    return g;
-}
+
 
 int main(int argc, char ** argv)
 {
+    int status;
+    while(status!=0)
+    {
+        cout<<"///////////////////////////// MENU DE INTERACAO ////////////////////////"<<endl;
+        cout<<" 1 - interacao ""a"" (fecho transitivo direto)"<<endl;
+        cout<<" 2 - interacao ""b"" (fecho transitivo indireto"<<endl;
+        cout<<" 3 - interacao ""c"" (caminho minimo por djkstra)"<<endl;
+        cout<<" 4 - interacao ""d"" (caminho minimo por floyd)"<<endl;
+        cout<<" 5 - interacao ""e"" (arvore geradora minima vertice-induzido por x usando Prim)"<<endl;
+        cout<<" 6 - interacao ""f"" (arvore geradora minima  vertice-induzido por x usando Kruskal)"<<endl;
+        cout<<" 7 - interacao ""g"" (a arvore dada pela ordem de caminhamento em profundidade a partir de no dado parametro,destacando as arestas de retorno)"<<endl;
+        cout<<" 8 - interacao ""h"" (uma ordenaçao topologica em D ou a informaçao de que D nao e um grafo aciclico direcionado)"<<endl;
+        cout<<" 0 - sair"<<endl;
+        cin>>status;
+        switch ( status )
+        {
+        case 1 :
+            // letra a
+            break;
+        case 2 :
+            // letra b
+            break;
+        case 3 :
+            //letra c
+            break;
+        case 4 :
+            //letra d
+            break;
+        case 5 :
+            //letra e
+            break;
+        case 6 :
+            //letra f
+            break;
+        case 7 :
+            //letra g
+            break;
+        case 8 :
+            //letra h
+            break;
+        case 0 :
+            status=0;
+            break;
+        default :
+            break;
+        }
+    }
+
     int arnaldo=2;
 
     grafo teste(0,1,0,10);
@@ -82,10 +89,11 @@ int main(int argc, char ** argv)
     saida.open("Saida.txt");
     if(saida.is_open())
     {
-        teste.imprimeEmDot(&saida);
+        //teste.imprimeEmDot(&saida);
 
     }
-    else cout << "Problema ao criar arquivo" << endl;
+    else
+        cout << "Problema ao criar arquivo" << endl;
     saida.close();
     cout << "Fim escrita arquivo" << endl;
 

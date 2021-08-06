@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="ListaEnc.h" />
+		<Unit filename="criarArquivo.h" />
 		<Unit filename="grafo.cpp" />
 		<Unit filename="grafo.h" />
 		<Unit filename="main.cpp" />
