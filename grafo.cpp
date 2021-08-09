@@ -281,11 +281,13 @@ void grafo::converteListaMatrizAB(bool **matriz)
             matriz[i][j]=false;
         }
     }
-    for(int i=0; i<tamanho; i++)
-    {
-        for(int j=0; j<vertices[i].tamanho(); j++)
-        {
-            matriz[i][vertices[i].get(j)]=vertices[i].existe(j);
+    for(int i=0;i<tamanho;i++){
+        for(int j=0;j<tamanho;j++){
+            if(i == j )
+                matriz[i][j]= false;
+            else
+                matriz[i][j]=vertices[i].existe(j);
+
         }
     }
 }
@@ -305,16 +307,16 @@ void grafo::letraA(int id)
 
         converteListaMatrizAB(matriz);
         solucao = new ListaEnc();
-        if(!vertices[id].vazia())
-        {
-            for(int j = 0; j < tamanho; j++)
-            {
-                if(matriz[id][j])
-                {
-                    if(!solucao->existe(vertices[id].get(j)))
-                    {
-                        solucao->insereFinal(vertices[id].get(j));
-                        pilha.push(vertices[id].get(j));
+
+        if(!vertices[id].vazia()){
+            for(int j = 0; j < tamanho; j++){
+                if(matriz[id][j]){
+                    if(!solucao->existe(j)){
+                        solucao->insereFinal(j);
+                        pilha.push(j);
+                        cout << "push" << endl;
+                        solucao->mostrar();
+
                     }
                 }
             }
@@ -323,6 +325,58 @@ void grafo::letraA(int id)
         {
             id = pilha.top();
             pilha.pop();
+
+            if(!vertices[id].vazia()){
+                for(int j = 0; j < tamanho; j++){
+                    if(matriz[id][j]){
+                        if(!solucao->existe(j)){
+                            solucao->insereFinal(j);
+                            pilha.push(j);
+                        }
+                    }
+                }
+            }
+
+        }
+        imprimeEmDot(solucao);
+        cout << "Fim letra A" << endl;
+    }
+}
+
+void grafo::letraB(int id){
+    cout << "Inicio letra B" << endl;
+    if(id < tamanho){
+        ListaEnc *solucao;
+        stack<int> pilha;
+        bool **matriz = new bool*[tamanho];
+        for(int i=0;i<tamanho;i++){
+            matriz[i]= new bool[tamanho];
+        }
+
+        converteListaMatrizAB(matriz);
+        solucao = new ListaEnc();
+        if(!vertices[id].vazia()){
+            for(int i = 0; i < tamanho; i++){
+                if(matriz[i][id]){
+                    if(!solucao->existe(i)){
+                        solucao->insereFinal(i);
+                        pilha.push(i);
+                        cout << "push" << endl;
+                        solucao->mostrar();
+                    }
+                }
+            }
+        }
+        while(!pilha.empty()){
+            id = pilha.top();
+            pilha.pop();
+            if(!vertices[id].vazia()){
+                for(int i = 0; i < tamanho; i++){
+                    if(matriz[i][id]){
+                        if(!solucao->existe(i)){
+                            solucao->insereFinal(i);
+                            pilha.push(i);
+                          
             if(!vertices[id].vazia())
             {
                 for(int j = 0; j < tamanho; j++)
@@ -340,6 +394,7 @@ void grafo::letraA(int id)
 
         }
         solucao->mostrar();
+        imprimeEmDot(solucao);
         cout << "Fim letra A" << endl;
     }
 }

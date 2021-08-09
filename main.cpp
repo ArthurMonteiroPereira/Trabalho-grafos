@@ -38,6 +38,7 @@ int main(int argc, char ** argv)
             break;
         case 2 :
             // letra b
+            teste->letraB(6);
             break;
         case 3 :
             //letra c
