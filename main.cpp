@@ -16,6 +16,7 @@ using namespace std;
 int main(int argc, char ** argv)
 {
     int status;
+    grafo *teste = leituraArquivo();
     while(status!=0)
     {
         cout<<"///////////////////////////// MENU DE INTERACAO ////////////////////////"<<endl;
@@ -63,45 +64,25 @@ int main(int argc, char ** argv)
         }
     }
 
-    int arnaldo=2;
-
-    grafo teste(0,1,0,10);
-    teste.adicionaArestaPeso(0,5,7);
-    teste.adicionaArestaPeso(5,9,3);
-    teste.adicionaArestaPeso(2,3,7);
-    teste.adicionaArestaPeso(3,4,7);
-    //teste.imprimeArestaPeso();
-    cout << endl;
-    cout << endl;
-    teste.letraD(0,9);
-
-
-
-
-
     grafo *teste2 = leituraArquivo();
-    //teste2->imprime();
-
     cout << "\t--/--"<<endl;
-
     cout << "Inicio escrita arquivo" << endl;
     ofstream saida;
     saida.open("Saida.txt");
     if(saida.is_open())
     {
         //teste.imprimeEmDot(&saida);
-
     }
     else
         cout << "Problema ao criar arquivo" << endl;
     saida.close();
     cout << "Fim escrita arquivo" << endl;
-
+    /*
     if(teste.getTemArestaPonderada() == 0)
     {
         cout << "deu";
     }
-
+    */
     delete teste2;
 
     return 0;
