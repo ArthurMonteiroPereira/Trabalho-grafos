@@ -36,7 +36,7 @@ public:
     void letraA(int id);
     void converteListaMatrizAB(bool **matriz);
     void letraD(int no1,int no2); ////// https://pt.wikipedia.org/wiki/Algoritmo_de_Floyd-Warshall
-    void letraC(int no1,int no2);
+    void letraC(int no1,int no2);///////https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dijkstra.html
     int getTemArestaPonderada();
     int getEhDirecionado();
     int getTemPesoNosVertices();
