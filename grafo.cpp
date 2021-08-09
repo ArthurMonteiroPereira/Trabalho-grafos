@@ -5,6 +5,8 @@
 #define T 10
 #define INFINITO 999999999
 #include <fstream>
+#include <stack>
+
 using namespace std;
 
 grafo::grafo(int eDirecionado,int eArestaPonderada,int ePesoNosVertices,int tam){
@@ -36,19 +38,22 @@ grafo::~grafo(){
     }
 }
 
-void grafo::imprimeEmDot(ofstream* saida, ListaEnc* solucao){ // Mudar pra abrir o arquivo de saida aqui dentro mesmo
+void grafo::imprimeEmDot(ListaEnc* solucao){ // Mudar pra abrir o arquivo de saida aqui dentro mesmo
+    ofstream saida;
+    saida.open("Arquivo_Saida.txt");
+    if(saida.is_open()){
     int isDir = getEhDirecionado();
     int isPond = getTemArestaPonderada();
     int hasPesoVert = getTemPesoNosVertices();
 
     if(isDir)
     {
-        *saida << "strict digraph {" << endl;
+        saida << "strict digraph {" << endl;
     }
 
     if(!isDir)
     {
-        *saida << "strict graph {" << endl;
+        saida << "strict graph {" << endl;
     }
 
     if(hasPesoVert)
@@ -58,19 +63,19 @@ void grafo::imprimeEmDot(ofstream* saida, ListaEnc* solucao){ // Mudar pra abrir
             {
                 for(int z=0;z<vertices[i].tamanho()&&solucao->existe(z);z++)
                     {
-                        *saida << i << "_p" << pesoV[i];
+                        saida << i << "_p" << pesoV[i];
                         if(isDir)
-                            *saida << "->";
+                            saida << "->";
                         else
-                            *saida << "--";
-                        *saida << vertices[i].get(z);
+                            saida << "--";
+                        saida << vertices[i].get(z);
                         if(isPond)
-                            *saida << "[label =" << retornaPesoAresta(i,vertices[i].get(z)) << "]" <<endl;
+                            saida << "[label =" << retornaPesoAresta(i,vertices[i].get(z)) << "]" <<endl;
 
                     }
             }
             else
-                *saida << i << endl;
+                saida << i << endl;
     }
 
     if(!hasPesoVert)
@@ -78,24 +83,27 @@ void grafo::imprimeEmDot(ofstream* saida, ListaEnc* solucao){ // Mudar pra abrir
                 for(int i=0; i < tamanho; i++)
             if(solucao->existe(i))
             {
-                for(int z=0;z<vertices[i].tamanho()&&solucao->existe(i);z++)
+                for(int z=0;z<vertices[i].tamanho()&&solucao->existe(z);z++)
                     {
-                        *saida << i;
+                        saida << i;
                         if(isDir)
-                            *saida << "->";
+                            saida << "->";
                         else
-                            *saida << "--";
-                        *saida << vertices[i].get(z);
+                            saida << "--";
+                        saida << vertices[i].get(z);
                         if(isPond)
-                            *saida << "[label =" << retornaPesoAresta(i,vertices[i].get(z)) << "]" <<endl;
+                            saida << "[label =" << retornaPesoAresta(i,vertices[i].get(z)) << "]" <<endl;
                     }
 
             }
             else
-                *saida << i << endl;
+                saida << i << endl;
     }
-    *saida << "}";
-    return;
+    saida << "}";
+    }
+    else
+        cout << "Problema ao criar arquivo" << endl;
+    saida.close();
 }
 
 void grafo::imprime(){
@@ -218,6 +226,61 @@ void grafo::imprimeMatriz(){
         delete[] matriz[i];
     }
     delete[] matriz;
+}
+
+void grafo::converteListaMatrizAB(bool **matriz){
+    for(int i=0;i<tamanho;i++){
+        for(int j=0;j<tamanho;j++){
+            matriz[i][j]=false;
+        }
+    }
+    for(int i=0;i<tamanho;i++){
+        for(int j=0;j<vertices[i].tamanho();j++){
+            matriz[i][vertices[i].get(j)]=vertices[i].existe(j);
+        }
+    }
+}
+
+void grafo::letraA(int id){
+    cout << "Inicio letra A" << endl;
+    if(id < tamanho){
+        ListaEnc *solucao;
+        stack<int> pilha;
+        bool **matriz = new bool*[tamanho];
+        for(int i=0;i<tamanho;i++){
+            matriz[i]= new bool[tamanho];
+        }
+
+        converteListaMatrizAB(matriz);
+        solucao = new ListaEnc();
+        if(!vertices[id].vazia()){
+            for(int j = 0; j < tamanho; j++){
+                if(matriz[id][j]){
+                    if(!solucao->existe(vertices[id].get(j))){
+                        solucao->insereFinal(vertices[id].get(j));
+                        pilha.push(vertices[id].get(j));
+                    }
+                }
+            }
+        }
+        while(!pilha.empty()){
+            id = pilha.top();
+            pilha.pop();
+            if(!vertices[id].vazia()){
+                for(int j = 0; j < tamanho; j++){
+                    if(matriz[id][j]){
+                        if(!solucao->existe(vertices[id].get(j))){
+                            solucao->insereFinal(vertices[id].get(j));
+                            pilha.push(vertices[id].get(j));
+                        }
+                    }
+                }
+            }
+
+        }
+        solucao->mostrar();
+        cout << "Fim letra A" << endl;
+    }
 }
 
 void grafo::letraD(int no1,int no2){

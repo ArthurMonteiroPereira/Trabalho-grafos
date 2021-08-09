@@ -34,6 +34,7 @@ int main(int argc, char ** argv)
         {
         case 1 :
             // letra a
+            teste->letraA(6);
             break;
         case 2 :
             // letra b
@@ -64,26 +65,8 @@ int main(int argc, char ** argv)
         }
     }
 
-    grafo *teste2 = leituraArquivo();
     cout << "\t--/--"<<endl;
-    cout << "Inicio escrita arquivo" << endl;
-    ofstream saida;
-    saida.open("Saida.txt");
-    if(saida.is_open())
-    {
-        //teste.imprimeEmDot(&saida);
-    }
-    else
-        cout << "Problema ao criar arquivo" << endl;
-    saida.close();
-    cout << "Fim escrita arquivo" << endl;
-    /*
-    if(teste.getTemArestaPonderada() == 0)
-    {
-        cout << "deu";
-    }
-    */
-    delete teste2;
 
+    delete teste;
     return 0;
 }

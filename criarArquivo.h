@@ -3,7 +3,11 @@ grafo* leituraArquivo()
     cout << "Inicio leitura do arquivo" << endl;
     ifstream entrada;
     grafo *g = NULL;
-    entrada.open("grafo_125.txt");
+    cout << "Digite nome do arquivo .txt:" << endl;
+    string arquivo;
+    cin >> arquivo;
+    arquivo += ".txt";
+    entrada.open(arquivo.c_str());
     if(!entrada){
         abort();
     }
