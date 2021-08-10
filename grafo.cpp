@@ -314,9 +314,6 @@ void grafo::letraA(int id)
                     if(!solucao->existe(j)){
                         solucao->insereFinal(j);
                         pilha.push(j);
-                        cout << "push" << endl;
-                        solucao->mostrar();
-
                     }
                 }
             }
@@ -365,9 +362,6 @@ void grafo::letraB(int id)
                     if(!solucao->existe(i)){
                         solucao->insereFinal(i);
                         pilha.push(i);
-                        cout << "push" << endl;
-                        solucao->mostrar();
-
                     }
                 }
             }

@@ -26,37 +26,31 @@ grafo* leituraArquivo()
             numero = "";
         }
         if(g == NULL){
-
-            g = new grafo(0,1,0,fila.front());
-
+            g = new grafo(0,0,0, fila.front());
             fila.pop();
         }
+
         else
         {
-            if(!fila.empty()&&fila.size()== 3)
-                {
-                    int no1 = fila.front(), no2, peso;
+            while(!fila.empty())
+            {
+                int no1, no2;
+                no1 = fila.front();
+                fila.pop();
+                no2 = fila.front();
+                fila.pop();
+                if(g->getTemArestaPonderada() == 1){
+                    int peso;
+                    peso = fila.front();
                     fila.pop();
-                    while(!fila.empty())
-                    {
-                        no2 = fila.front();
-                        fila.pop();
-                        peso = fila.front();
-                        g->adicionaArestaPeso(no1,no2,peso);
-                        fila.pop();
-                    }
+                    g->adicionaArestaPeso(no1,no2,peso);
                 }
-                if(!fila.empty()&&fila.size()== 2)
+                else
                 {
-                    int no1 = fila.front(), no2;
-                    fila.pop();
-                    while(!fila.empty())
-                    {
-                        no2 = fila.front();
-                        g->adicionaAresta((no1),(no2));
-                        fila.pop();
-                    }
+                    g->adicionaAresta((no1-1),(no2-1));
+
                 }
+            }
         }
     }
     cout << "Fim leitura arquivo" << endl;
