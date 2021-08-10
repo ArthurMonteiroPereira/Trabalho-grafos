@@ -3,9 +3,18 @@ grafo* leituraArquivo()
     cout << "Inicio leitura do arquivo" << endl;
     ifstream entrada;
     grafo *g = NULL;
+    int eDirecionado;
+    int eArestaPonderada;
+    int eVerticePonderado;
     cout << "Digite nome do arquivo .txt:" << endl;
     string arquivo;
     cin >> arquivo;
+    cout << "E direcionado? 1-Sim  0-Nao:" << endl;
+    cin >> eDirecionado;
+    cout << "Tem aresta ponderada? 1-Sim  0-Nao:" << endl;
+    cin >> eArestaPonderada;
+    cout << "Tem vertice ponderado? 1-Sim  0-Nao:" << endl;
+    cin >> eVerticePonderado;
     arquivo += ".txt";
     entrada.open(arquivo.c_str());
     if(!entrada){
@@ -26,7 +35,7 @@ grafo* leituraArquivo()
             numero = "";
         }
         if(g == NULL){
-            g = new grafo(0,0,0, fila.front());
+            g = new grafo(eDirecionado,eArestaPonderada,eVerticePonderado, fila.front());
             fila.pop();
         }
 
