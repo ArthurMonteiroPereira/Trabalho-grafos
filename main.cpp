@@ -16,6 +16,7 @@ using namespace std;
 int main(int argc, char ** argv)
 {
     int status;
+    int aux1,aux2;
     grafo *teste = leituraArquivo();
     while(status!=0)
     {
@@ -47,7 +48,10 @@ int main(int argc, char ** argv)
             break;
         }
         case 4 :{
-            //letra d
+            cout<<"digite os dois nos que deseja o caminho minimo"<<endl;
+            cin>>aux1;
+            cin>>aux2;
+            teste->letraD(aux1,aux2);
             break;
         }
         case 5 :{
