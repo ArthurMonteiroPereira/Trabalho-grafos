@@ -26,7 +26,9 @@ grafo* leituraArquivo()
             numero = "";
         }
         if(g == NULL){
-            g = new grafo(1,1,0,fila.front());
+
+            g = new grafo(0,1,0,fila.front());
+
             fila.pop();
         }
         else

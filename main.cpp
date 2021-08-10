@@ -27,40 +27,51 @@ int main(int argc, char ** argv)
         cout<<" 5 - interacao ""e"" (arvore geradora minima vertice-induzido por x usando Prim)"<<endl;
         cout<<" 6 - interacao ""f"" (arvore geradora minima  vertice-induzido por x usando Kruskal)"<<endl;
         cout<<" 7 - interacao ""g"" (a arvore dada pela ordem de caminhamento em profundidade a partir de no dado parametro,destacando as arestas de retorno)"<<endl;
-        cout<<" 8 - interacao ""h"" (uma ordenaçao topologica em D ou a informaçao de que D nao e um grafo aciclico direcionado)"<<endl;
+        cout<<" 8 - interacao ""h"" (uma ordenaÃ§ao topologica em D ou a informaÃ§ao de que D nao e um grafo aciclico direcionado)"<<endl;
         cout<<" 0 - sair"<<endl;
         cin>>status;
         switch ( status )
         {
-        case 1 :
+        case 1 :{
             // letra a
             teste->letraA(6);
             break;
-        case 2 :
+        }
+        case 2 :{
             // letra b
             teste->letraB(6);
             break;
-        case 3 :
+        }
+        case 3 :{
             //letra c
             break;
-        case 4 :
+        }
+        case 4 :{
             //letra d
             break;
-        case 5 :
+        }
+        case 5 :{
             //letra e
+            int v[] = {6,8,12,13,17,29,116};
+            teste->letraE(v);
             break;
-        case 6 :
+        }
+        case 6 :{
             //letra f
             break;
-        case 7 :
+        }
+        case 7 :{
             //letra g
             break;
-        case 8 :
+        }
+        case 8 :{
             //letra h
             break;
-        case 0 :
+        }
+        case 0 :{
             status=0;
             break;
+        }
         default :
             break;
         }

@@ -376,17 +376,21 @@ void grafo::letraB(int id){
                         if(!solucao->existe(i)){
                             solucao->insereFinal(i);
                             pilha.push(i);
-                          
-            if(!vertices[id].vazia())
-            {
-                for(int j = 0; j < tamanho; j++)
+
+                        }
+
+                if(!vertices[id].vazia())
                 {
-                    if(matriz[id][j])
-                    {
-                        if(!solucao->existe(vertices[id].get(j)))
+                    for(int j = 0; j < tamanho; j++)
                         {
-                            solucao->insereFinal(vertices[id].get(j));
-                            pilha.push(vertices[id].get(j));
+                            if(matriz[id][j])
+                            {
+                                if(!solucao->existe(vertices[id].get(j)))
+                                {
+                                    solucao->insereFinal(vertices[id].get(j));
+                                    pilha.push(vertices[id].get(j));
+                                }
+                            }
                         }
                     }
                 }
@@ -395,7 +399,8 @@ void grafo::letraB(int id){
         }
         solucao->mostrar();
         imprimeEmDot(solucao);
-        cout << "Fim letra A" << endl;
+        cout << "Fim letra B" << endl;
+        }
     }
 }
 
@@ -467,6 +472,41 @@ void grafo::letraD(int no1,int no2)
 void grafo::letraC(int no1,int no2)
 {
 
+}
+
+
+void grafo::letraE(int *vet)
+{
+    grafo *sub = new grafo(direcionado, arestaPonderada, pesoNosVertices,tamanho);
+    ListaEnc *solucao =new ListaEnc(), *conectados = new ListaEnc();
+    int arestaMin[] = {0,0,0};
+    for(int i = 0; i < sizeof(vet); i++){
+        solucao->insereFinal(vet[i]);
+    }
+
+    while(conectados->tamanho() < solucao->tamanho()){
+        conectados->insereFinal(vet[0]);
+        for(int i = 0; i < conectados->tamanho(); i++){
+            for(int j = 0; j < vertices[i].tamanho(); j++){
+                if(solucao->existe(j) && !conectados->existe(j)){
+                    if(arestaMin[0] == 0 && arestaMin[1] == 0 && arestaMin[2] == 0){
+                        arestaMin[0] = i;
+                        arestaMin[1] = j;
+                        arestaMin[2] = vertices[i].getPeso(j);
+                    }
+                    else if(vertices[i].getPeso(j) < arestaMin[2]){
+                        arestaMin[0] = i;
+                        arestaMin[1] = j;
+                        arestaMin[2] = vertices[i].getPeso(j);
+                    }
+                }
+            }
+        }
+        sub->adicionaArestaPeso(arestaMin[0],arestaMin[1],arestaMin[2]);
+        conectados->insereFinal(arestaMin[1]);
+    }
+    //sub->imprime();
+    sub->imprimeEmDot(solucao);
 }
 
 bool grafo::existeAresta(int no1,int no2) {}
