@@ -41,6 +41,8 @@ public:
     int minVetor(int *dist,bool *esta);
     void letraE(ofstream *saida,ListaEnc* vet);
     void letraF(ofstream *saida, ListaEnc *vet);
+    void letraG(ofstream *saida, int id);
+    ListaEnc* recursivoG(int id, ListaEnc *sol, bool *vis);
     int contaArestas();
     int getTemArestaPonderada();
     int getEhDirecionado();

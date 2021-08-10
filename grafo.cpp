@@ -706,13 +706,37 @@ int grafo::contaArestas(){
      return aux;
 }
 void grafo::letraF(ofstream *saida, ListaEnc *vet){
-    grafo *sub = new grafo(direcionado, arestaPonderada, pesoNosVertices, tamanho);
-    ListaEnc *solucao = new ListaEnc(), *arestaOrd = new ListaEnc();
+
+    grafo *arvore = new grafo(direcionado, arestaPonderada, pesoNosVertices, tamanho);
+
     for(int k = 0; k < vet->tamanho(); k++)
     {
         solucao->insereInicio(vet->get(k));
     }
 
+}
+
+void grafo::letraG(ofstream *saida, int id){
+    ListaEnc *arvore = new ListaEnc();
+    bool *visitados = new  bool[tamanho];
+    for(int i = 0; i < tamanho; i++){
+        visitados[i] = false;
+    }
+    arvore = recursivoG(id,arvore,visitados);
+    imprimeEmDot(saida, arvore);
+    imprimeEmDotTela(arvore);
+}
+
+ListaEnc* grafo::recursivoG(int id, ListaEnc *sol, bool *vis){
+    vis[id] = true;
+    sol->insereFinal(id);
+
+    for(int i = 0; i < vertices[id].tamanho(); i++){
+        if(!vis[vertices[id].get(i)]){
+            recursivoG(vertices[id].get(i),sol,vis);
+        }
+    }
+    return  sol;
 }
 
 bool grafo::existeAresta(int no1,int no2) {}
