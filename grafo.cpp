@@ -232,7 +232,7 @@ int grafo::retornaPesoAresta(int no1,int no2)
     return vertices[no1].getPeso(vertices[no1].existeRetorna(no2));
 }
 
-void grafo::converteListaMatriz(int **matriz)
+void grafo::converteListaMatrizD(int **matriz)
 {
     for(int i=0; i<tamanho; i++)
     {
@@ -257,7 +257,7 @@ void grafo::imprimeMatriz()
     {
         matriz[i]= new int[tamanho];
     }
-    converteListaMatriz(matriz);
+    converteListaMatrizD(matriz);
     for (int i=0; i<tamanho; i++)
     {
         cout<<endl;
@@ -314,9 +314,6 @@ void grafo::letraA(int id)
                     if(!solucao->existe(j)){
                         solucao->insereFinal(j);
                         pilha.push(j);
-                        cout << "push" << endl;
-                        solucao->mostrar();
-
                     }
                 }
             }
@@ -343,64 +340,51 @@ void grafo::letraA(int id)
     }
 }
 
-void grafo::letraB(int id){
+void grafo::letraB(int id)
+{
     cout << "Inicio letra B" << endl;
-    if(id < tamanho){
+    if(id < tamanho)
+    {
         ListaEnc *solucao;
         stack<int> pilha;
         bool **matriz = new bool*[tamanho];
-        for(int i=0;i<tamanho;i++){
+        for(int i=0; i<tamanho; i++)
+        {
             matriz[i]= new bool[tamanho];
         }
 
         converteListaMatrizAB(matriz);
         solucao = new ListaEnc();
+
         if(!vertices[id].vazia()){
             for(int i = 0; i < tamanho; i++){
                 if(matriz[i][id]){
                     if(!solucao->existe(i)){
                         solucao->insereFinal(i);
                         pilha.push(i);
-                        cout << "push" << endl;
-                        solucao->mostrar();
                     }
                 }
             }
         }
-        while(!pilha.empty()){
+        while(!pilha.empty())
+        {
             id = pilha.top();
             pilha.pop();
+
             if(!vertices[id].vazia()){
                 for(int i = 0; i < tamanho; i++){
                     if(matriz[i][id]){
                         if(!solucao->existe(i)){
                             solucao->insereFinal(i);
                             pilha.push(i);
-
-                        }
-
-                if(!vertices[id].vazia())
-                {
-                    for(int j = 0; j < tamanho; j++)
-                        {
-                            if(matriz[id][j])
-                            {
-                                if(!solucao->existe(vertices[id].get(j)))
-                                {
-                                    solucao->insereFinal(vertices[id].get(j));
-                                    pilha.push(vertices[id].get(j));
-                                }
-                            }
                         }
                     }
                 }
             }
 
         }
-        solucao->mostrar();
         imprimeEmDot(solucao);
         cout << "Fim letra B" << endl;
-        }
     }
 }
 
@@ -412,7 +396,7 @@ void grafo::letraD(int no1,int no2)
     {
         matriz[i]= new int[tamanho];
     }
-    converteListaMatriz(matriz);
+    converteListaMatrizD(matriz);
     ///////////////////criando matriz aux//////////////
     int **aux = new int*[tamanho];
     for(int i=0; i<tamanho; i++)
@@ -475,38 +459,41 @@ void grafo::letraC(int no1,int no2)
 }
 
 
-void grafo::letraE(int *vet)
+void grafo::letraE(ListaEnc* vet)
 {
     grafo *sub = new grafo(direcionado, arestaPonderada, pesoNosVertices,tamanho);
     ListaEnc *solucao =new ListaEnc(), *conectados = new ListaEnc();
-    int arestaMin[] = {0,0,0};
-    for(int i = 0; i < sizeof(vet); i++){
-        solucao->insereFinal(vet[i]);
-    }
+    int arestaMin[] = {INFINITO,INFINITO,INFINITO};
 
+    for(int k = 0; k < vet->tamanho(); k++)
+        {
+            solucao->insereInicio(vet->get(k));
+        }
+
+    cout<<solucao->tamanho()<<endl;
+    conectados->insereInicio(vet->get(0));
     while(conectados->tamanho() < solucao->tamanho()){
-        conectados->insereFinal(vet[0]);
-        for(int i = 0; i < conectados->tamanho(); i++){
-            for(int j = 0; j < vertices[i].tamanho(); j++){
-                if(solucao->existe(j) && !conectados->existe(j)){
-                    if(arestaMin[0] == 0 && arestaMin[1] == 0 && arestaMin[2] == 0){
+        for(int i = 0; i < tamanho; i++){
+            for(int j = 0; j < tamanho; j++){
+                if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i)){
+                        cout<<"entrou1"<<endl;
+                    if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < arestaMin[2]){
+                        cout<<"entrou2"<<endl;
                         arestaMin[0] = i;
                         arestaMin[1] = j;
-                        arestaMin[2] = vertices[i].getPeso(j);
-                    }
-                    else if(vertices[i].getPeso(j) < arestaMin[2]){
-                        arestaMin[0] = i;
-                        arestaMin[1] = j;
-                        arestaMin[2] = vertices[i].getPeso(j);
+                        arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
                     }
                 }
             }
         }
+        cout<<"add"<<arestaMin[0]<<","<<arestaMin[1]<<","<<arestaMin[2]<<endl;
         sub->adicionaArestaPeso(arestaMin[0],arestaMin[1],arestaMin[2]);
-        conectados->insereFinal(arestaMin[1]);
+        conectados->insereInicio(arestaMin[1]);
+        arestaMin[2] = INFINITO;
     }
     //sub->imprime();
     sub->imprimeEmDot(solucao);
+    sub->imprime();
 }
 
 bool grafo::existeAresta(int no1,int no2) {}
