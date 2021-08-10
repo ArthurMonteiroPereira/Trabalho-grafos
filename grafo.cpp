@@ -706,7 +706,9 @@ int grafo::contaArestas(){
      return aux;
 }
 void grafo::letraF(ofstream *saida, ListaEnc *vet){
+
     grafo *arvore = new grafo(direcionado, arestaPonderada, pesoNosVertices, tamanho);
+
     for(int k = 0; k < vet->tamanho(); k++)
     {
         solucao->insereInicio(vet->get(k));

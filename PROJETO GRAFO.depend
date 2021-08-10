@@ -25,7 +25,7 @@
 	"ListaEnc.h"
 	"grafo.h"
 
-1628610459 source:c:\users\arthu\documents\github\trabalho-grafos\grafo.cpp
+1628617088 source:c:\users\arthu\documents\github\trabalho-grafos\grafo.cpp
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
@@ -37,13 +37,13 @@
 1628173219 c:\users\arthu\documents\github\trabalho-grafos\listaenc.h
 	<iostream>
 
-1628610459 c:\users\arthu\documents\github\trabalho-grafos\grafo.h
+1628617088 c:\users\arthu\documents\github\trabalho-grafos\grafo.h
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
 	<fstream>
 
-1628528640 source:c:\users\arthu\documents\github\trabalho-grafos\main.cpp
+1628616611 source:c:\users\arthu\documents\github\trabalho-grafos\main.cpp
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
@@ -61,4 +61,69 @@
 	"ListaEnc.h"
 	"grafo.h"
 
-1628525732 c:\users\arthu\documents\github\trabalho-grafos\criararquivo.h
+1628614228 c:\users\arthu\documents\github\trabalho-grafos\criararquivo.h
+
+1628629141 source:c:\users\ufjf\desktop\trabalho-grafos-main\grafo.cpp
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	"grafo.h"
+	<fstream>
+	<stack>
+	<queue>
+
+1628602840 c:\users\ufjf\desktop\trabalho-grafos-main\listaenc.h
+	<iostream>
+
+1628628530 c:\users\ufjf\desktop\trabalho-grafos-main\grafo.h
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	<fstream>
+
+1628625696 source:c:\users\ufjf\desktop\trabalho-grafos-main\main.cpp
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	"grafo.h"
+	<fstream>
+	<cstdlib>
+	<string>
+	<cstring>
+	<queue>
+	"criarArquivo.h"
+
+1628618166 c:\users\ufjf\desktop\trabalho-grafos-main\criararquivo.h
+
+1628630770 source:d:\downloads\trabalho-grafos\trabalho-grafos-main\main.cpp
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	"grafo.h"
+	<fstream>
+	<cstdlib>
+	<string>
+	<cstring>
+	<queue>
+	"criarArquivo.h"
+
+1628602840 d:\downloads\trabalho-grafos\trabalho-grafos-main\listaenc.h
+	<iostream>
+
+1628634747 d:\downloads\trabalho-grafos\trabalho-grafos-main\grafo.h
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	<fstream>
+
+1628618166 d:\downloads\trabalho-grafos\trabalho-grafos-main\criararquivo.h
+
+1628632658 source:d:\downloads\trabalho-grafos\trabalho-grafos-main\grafo.cpp
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	"grafo.h"
+	<fstream>
+	<stack>
+	<queue>
+
