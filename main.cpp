@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "ListaEnc.h"
 #include "grafo.h"
-//#include "grafo.cpp"
 #include <fstream>
 #include <cstdlib>
 #include <string>
@@ -38,7 +37,7 @@ int main(int argc, char ** argv)
         case 1 :{
             // letra a
             saida << "////////// LETRA a /////////////////"<<endl;
-            teste->letraA(&saida,6);
+            teste->letraA(&saida, 6);
             saida << endl<<"////////////////////////////////////"<<endl;
             break;
         }
@@ -51,12 +50,26 @@ int main(int argc, char ** argv)
         }
         case 3 :{
             //letra c
+            cout<<"digite os dois nos que deseja o caminho minimo"<<endl;
+            cin>>aux1;
+            cout<<endl;
+            cin>>aux2;
+            cout<<endl;
+            aux3=teste->letraC(aux1,aux2);
+            saida << "////////// LETRA c /////////////////"<<endl;
+            cout<<"Caminho minimo entre os nos "<<aux1<<" e "<<aux2<<" tem tamanho:"<<aux3<<endl;
+            saida<<"Caminho minimo entre os nos "<<aux1<<" e "<<aux2<<" tem tamanho:"<<aux3<<endl;
+            teste->imprimeArestaModelo(&saida,aux1,aux2,aux3);
+            teste->imprimeArestaModeloTela(aux1,aux2,aux3);
+            saida <<endl<< "////////////////////////////////////"<<endl;
             break;
         }
         case 4 :{
             cout<<"digite os dois nos que deseja o caminho minimo"<<endl;
             cin>>aux1;
+            cout<<endl;
             cin>>aux2;
+            cout<<endl;
             aux3=teste->letraD(aux1,aux2);
             saida << "////////// LETRA d /////////////////"<<endl;
             cout<<"Caminho minimo entre os nos "<<aux1<<" e "<<aux2<<" tem tamanho:"<<aux3<<endl;

@@ -605,13 +605,58 @@ int grafo::letraD(int no1,int no2)
     delete[] matriz;
 }
 
-void grafo::letraC(int no1,int no2)
+int grafo::letraC(int no1,int no2)
 {
-
+    int aux;
+    ///////////alocando matrix de adjacencia///////////
+    int **matriz = new int*[tamanho];
+    for(int i=0; i<tamanho; i++)
+    {
+        matriz[i]= new int[tamanho];
+    }
+    converteListaMatrizD(matriz);
+    //////////// ALGORITIMO //////////////////
+    int *dist = new int [tamanho];
+    bool *esta = new bool[tamanho];
+    for(int i=0;i<tamanho;i++){
+        dist[i]=INFINITO;
+        esta[i]=false;
+    }
+    dist[no1]=0;
+    for(int i=0;i<tamanho-1;i++){
+        int u = minVetor(dist,esta);
+        esta[i]=true;
+        for(int j=0;j<tamanho;j++){
+            if(!esta[j]&& matriz[u][j]&&dist[u]!=INFINITO&&dist[u]+matriz[u][j]<dist[j]){
+                dist[j]=dist[u]+matriz[u][j];
+            }
+        }
+    }
+    //////////////////////////////
+    aux=dist[no2];
+    //////////////////////////////
+    for(int i=0; i<tamanho; i++)
+    {
+        delete[] matriz[i];
+    }
+    delete[] matriz;
+    ///////////////////////////
+    return aux;
 }
 
+int grafo::minVetor(int *dist,bool *esta){
+    int base=INFINITO;
+    int mIndice;
+    for(int i=0;i<tamanho;i++){
+        if(esta[i]==false && dist[i]<=base){
+            base=dist[i];
+            mIndice=i;
+        }
+    }
+    return mIndice;
+}
 
-void grafo::letraE(ofstream *saida,ListaEnc* vet)
+void grafo::letraE(ofstream *saida,ListaEnc *vet)
 {
     grafo *sub = new grafo(direcionado, arestaPonderada, pesoNosVertices,tamanho);
     ListaEnc *solucao =new ListaEnc(), *conectados = new ListaEnc();
@@ -651,6 +696,23 @@ void grafo::letraE(ofstream *saida,ListaEnc* vet)
     //sub->imprime();
     sub->imprimeEmDot(saida,solucao);
     sub->imprime();
+}
+
+int grafo::contaArestas(){
+     int aux=0;
+     for(int i=0;i<tamanho;i++){
+           aux+=vertices[i].tamanho();
+     }
+     return aux;
+}
+void grafo::letraF(ofstream *saida, ListaEnc *vet){
+    grafo *sub = new grafo(direcionado, arestaPonderada, pesoNosVertices, tamanho);
+    ListaEnc *solucao = new ListaEnc(), *arestaOrd = new ListaEnc();
+    for(int k = 0; k < vet->tamanho(); k++)
+    {
+        solucao->insereInicio(vet->get(k));
+    }
+
 }
 
 bool grafo::existeAresta(int no1,int no2) {}

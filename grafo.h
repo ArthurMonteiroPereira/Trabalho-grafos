@@ -33,12 +33,15 @@ public:
     void imprimeArestaPeso();
     void alteraPesoAresta(int no1,int no2,int peso);
     int retornaPesoAresta(int no1,int no2);
-    void letraA(ofstream *saida,int id);
+    void letraA(ofstream *saida, int id);
     void letraB(ofstream *saida,int id);
     void converteListaMatrizAB(bool **matriz);
     int letraD(int no1,int no2); ////// https://pt.wikipedia.org/wiki/Algoritmo_de_Floyd-Warshall
-    void letraC(int no1,int no2);///////https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dijkstra.html
+    int letraC(int no1,int no2);///////https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dijkstra.html
+    int minVetor(int *dist,bool *esta);
     void letraE(ofstream *saida,ListaEnc* vet);
+    void letraF(ofstream *saida, ListaEnc *vet);
+    int contaArestas();
     int getTemArestaPonderada();
     int getEhDirecionado();
     int getTemPesoNosVertices();

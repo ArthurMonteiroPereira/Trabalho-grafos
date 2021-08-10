@@ -9,12 +9,16 @@ grafo* leituraArquivo()
     cout << "Digite nome do arquivo .txt:" << endl;
     string arquivo;
     cin >> arquivo;
+    cout << endl;
     cout << "E direcionado? 1-Sim  0-Nao:" << endl;
     cin >> eDirecionado;
+    cout << endl;
     cout << "Tem aresta ponderada? 1-Sim  0-Nao:" << endl;
     cin >> eArestaPonderada;
+    cout << endl;
     cout << "Tem vertice ponderado? 1-Sim  0-Nao:" << endl;
     cin >> eVerticePonderado;
+    cout << endl;
     arquivo += ".txt";
     entrada.open(arquivo.c_str());
     if(!entrada){
