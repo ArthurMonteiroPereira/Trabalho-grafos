@@ -27,7 +27,7 @@ int main(int argc, char ** argv)
         cout<<" 5 - interacao ""e"" (arvore geradora minima vertice-induzido por x usando Prim)"<<endl;
         cout<<" 6 - interacao ""f"" (arvore geradora minima  vertice-induzido por x usando Kruskal)"<<endl;
         cout<<" 7 - interacao ""g"" (a arvore dada pela ordem de caminhamento em profundidade a partir de no dado parametro,destacando as arestas de retorno)"<<endl;
-        cout<<" 8 - interacao ""h"" (uma ordenaçao topologica em D ou a informaçao de que D nao e um grafo aciclico direcionado)"<<endl;
+        cout<<" 8 - interacao ""h"" (uma ordenaÃ§ao topologica em D ou a informaÃ§ao de que D nao e um grafo aciclico direcionado)"<<endl;
         cout<<" 0 - sair"<<endl;
         cin>>status;
         switch ( status )
@@ -70,8 +70,8 @@ int main(int argc, char ** argv)
         }
         case 0 :{
             status=0;
-        }
             break;
+        }
         default :
             break;
         }

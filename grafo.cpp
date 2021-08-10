@@ -376,6 +376,7 @@ void grafo::letraB(int id){
                         if(!solucao->existe(i)){
                             solucao->insereFinal(i);
                             pilha.push(i);
+
                         }
 
                 if(!vertices[id].vazia())
@@ -394,6 +395,7 @@ void grafo::letraB(int id){
                     }
                 }
             }
+
         }
         solucao->mostrar();
         imprimeEmDot(solucao);
@@ -401,6 +403,7 @@ void grafo::letraB(int id){
         }
     }
 }
+
 void grafo::letraD(int no1,int no2)
 {
     ///////////alocando matrix de adjacencia///////////
@@ -470,6 +473,7 @@ void grafo::letraC(int no1,int no2)
 {
 
 }
+
 
 void grafo::letraE(int *vet)
 {

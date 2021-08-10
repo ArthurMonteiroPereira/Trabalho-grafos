@@ -60,36 +60,3 @@
 	"grafo.h"
 
 1628525732 c:\users\arthu\documents\github\trabalho-grafos\criararquivo.h
-
-1628557344 source:c:\users\ufjf\desktop\trabalho-grafos-main\grafo.cpp
-	<iostream>
-	<stdio.h>
-	"ListaEnc.h"
-	"grafo.h"
-	<fstream>
-	<stack>
-	<queue>
-
-1628517708 c:\users\ufjf\desktop\trabalho-grafos-main\listaenc.h
-	<iostream>
-
-1628555491 c:\users\ufjf\desktop\trabalho-grafos-main\grafo.h
-	<iostream>
-	<stdio.h>
-	"ListaEnc.h"
-	<fstream>
-
-1628557132 source:c:\users\ufjf\desktop\trabalho-grafos-main\main.cpp
-	<iostream>
-	<stdio.h>
-	"ListaEnc.h"
-	"grafo.h"
-	<fstream>
-	<cstdlib>
-	<string>
-	<cstring>
-	<queue>
-	"criarArquivo.h"
-
-1628556672 c:\users\ufjf\desktop\trabalho-grafos-main\criararquivo.h
-
