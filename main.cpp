@@ -52,8 +52,13 @@ int main(int argc, char ** argv)
         }
         case 5 :{
             //letra e
-            int v[] = {6,8,12,13,17,29,116};
-            teste->letraE(v);
+            ListaEnc *vet = new ListaEnc();
+            int v[] = {6,8,12,13,17,29,49,116};
+            for(int k = 0; k < 8; k++)
+                {
+                    vet->insereInicio(v[k]);
+                }
+            teste->letraE(vet);
             break;
         }
         case 6 :{
