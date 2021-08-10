@@ -2,24 +2,56 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="criarArquivo.h" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="grafo.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="332" topLine="0" />
+			<Cursor1 position="13993" topLine="8" />
 		</Cursor>
+		<Folding>
+			<Collapse line="13" />
+			<Collapse line="35" />
+			<Collapse line="47" />
+			<Collapse line="89" />
+			<Collapse line="128" />
+			<Collapse line="190" />
+			<Collapse line="252" />
+			<Collapse line="267" />
+			<Collapse line="283" />
+			<Collapse line="303" />
+			<Collapse line="316" />
+			<Collapse line="320" />
+			<Collapse line="329" />
+			<Collapse line="345" />
+			<Collapse line="364" />
+			<Collapse line="369" />
+			<Collapse line="387" />
+			<Collapse line="409" />
+			<Collapse line="431" />
+			<Collapse line="545" />
+			<Collapse line="608" />
+			<Collapse line="614" />
+			<Collapse line="659" />
+			<Collapse line="664" />
+			<Collapse line="669" />
+		</Folding>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="332" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="grafo.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1669" topLine="6" />
+			<Cursor1 position="2193" topLine="18" />
 		</Cursor>
 	</File>
 	<File name="ListaEnc.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2130" topLine="251" />
+			<Cursor1 position="2130" topLine="66" />
+		</Cursor>
+	</File>
+	<File name="criarArquivo.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="652" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="grafo.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1754" topLine="7" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

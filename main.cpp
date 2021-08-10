@@ -16,11 +16,13 @@ using namespace std;
 int main(int argc, char ** argv)
 {
     int status;
-    int aux1,aux2;
+    int aux1,aux2,aux3;
+    ofstream saida;
     grafo *teste = leituraArquivo();
+    saida.open("Arquivo_Saida.txt");
     while(status!=0)
     {
-        cout<<"///////////////////////////// MENU DE INTERACAO ////////////////////////"<<endl;
+        cout<<endl<<"///////////////////////////// MENU DE INTERACAO ////////////////////////"<<endl;
         cout<<" 1 - interacao ""a"" (fecho transitivo direto)"<<endl;
         cout<<" 2 - interacao ""b"" (fecho transitivo indireto"<<endl;
         cout<<" 3 - interacao ""c"" (caminho minimo por djkstra)"<<endl;
@@ -35,12 +37,16 @@ int main(int argc, char ** argv)
         {
         case 1 :{
             // letra a
-            teste->letraA(6);
+            saida << "////////// LETRA a /////////////////"<<endl;
+            teste->letraA(&saida,6);
+            saida << endl<<"////////////////////////////////////"<<endl;
             break;
         }
         case 2 :{
             // letra b
-            teste->letraB(6);
+            saida << "////////// LETRA b /////////////////"<<endl;
+            teste->letraB(&saida,6);
+            saida <<endl<< "////////////////////////////////////"<<endl;
             break;
         }
         case 3 :{
@@ -51,7 +57,13 @@ int main(int argc, char ** argv)
             cout<<"digite os dois nos que deseja o caminho minimo"<<endl;
             cin>>aux1;
             cin>>aux2;
-            teste->letraD(aux1,aux2);
+            aux3=teste->letraD(aux1,aux2);
+            saida << "////////// LETRA d /////////////////"<<endl;
+            cout<<"Caminho minimo entre os nos "<<aux1<<" e "<<aux2<<" tem tamanho:"<<aux3<<endl;
+            saida<<"Caminho minimo entre os nos "<<aux1<<" e "<<aux2<<" tem tamanho:"<<aux3<<endl;
+            teste->imprimeArestaModelo(&saida,aux1,aux2,aux3);
+            teste->imprimeArestaModeloTela(aux1,aux2,aux3);
+            saida <<endl<< "////////////////////////////////////"<<endl;
             break;
         }
         case 5 :{
@@ -62,7 +74,7 @@ int main(int argc, char ** argv)
                 {
                     vet->insereInicio(v[k]);
                 }
-            teste->letraE(vet);
+            teste->letraE(&saida,vet);
             break;
         }
         case 6 :{
@@ -89,5 +101,6 @@ int main(int argc, char ** argv)
     cout << "\t--/--"<<endl;
 
     delete teste;
+    saida.close();
     return 0;
 }
