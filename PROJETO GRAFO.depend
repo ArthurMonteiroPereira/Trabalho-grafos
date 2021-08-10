@@ -25,7 +25,7 @@
 	"ListaEnc.h"
 	"grafo.h"
 
-1628193515 source:c:\users\arthu\documents\github\trabalho-grafos\grafo.cpp
+1628259169 source:c:\users\arthu\documents\github\trabalho-grafos\grafo.cpp
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
@@ -35,13 +35,13 @@
 1628173219 c:\users\arthu\documents\github\trabalho-grafos\listaenc.h
 	<iostream>
 
-1628173219 c:\users\arthu\documents\github\trabalho-grafos\grafo.h
+1628528640 c:\users\arthu\documents\github\trabalho-grafos\grafo.h
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
 	<fstream>
 
-1628193741 source:c:\users\arthu\documents\github\trabalho-grafos\main.cpp
+1628528640 source:c:\users\arthu\documents\github\trabalho-grafos\main.cpp
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
@@ -51,10 +51,45 @@
 	<string>
 	<cstring>
 	<queue>
+	"criarArquivo.h"
 
 1627352802 c:\users\arthu\documents\github\trabalho-grafos\grafo.cpp
 	<iostream>
 	<stdio.h>
 	"ListaEnc.h"
 	"grafo.h"
+
+1628525732 c:\users\arthu\documents\github\trabalho-grafos\criararquivo.h
+
+1628557344 source:c:\users\ufjf\desktop\trabalho-grafos-main\grafo.cpp
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	"grafo.h"
+	<fstream>
+	<stack>
+	<queue>
+
+1628517708 c:\users\ufjf\desktop\trabalho-grafos-main\listaenc.h
+	<iostream>
+
+1628555491 c:\users\ufjf\desktop\trabalho-grafos-main\grafo.h
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	<fstream>
+
+1628557132 source:c:\users\ufjf\desktop\trabalho-grafos-main\main.cpp
+	<iostream>
+	<stdio.h>
+	"ListaEnc.h"
+	"grafo.h"
+	<fstream>
+	<cstdlib>
+	<string>
+	<cstring>
+	<queue>
+	"criarArquivo.h"
+
+1628556672 c:\users\ufjf\desktop\trabalho-grafos-main\criararquivo.h
 

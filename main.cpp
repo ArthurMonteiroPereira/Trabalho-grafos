@@ -8,135 +8,77 @@
 #include <string>
 #include <cstring>
 #include <queue>
-
+#include "criarArquivo.h"
 using namespace std;
 
-grafo* leituraArquivo()
-{
-    cout << "Inicio leitura do arquivo" << endl;
-    ifstream entrada;
-    grafo *g = NULL;
 
-    string arq;
-    cout << "Digite o nome do arquivo com sua path: " << endl;
-    cin >> arq;
-    entrada.open(arq.c_str());
-
-    if(!entrada){
-        abort();
-    }
-    int direcionado, ponderado, peso;
-    queue<int> fila;
-    string numero = "";
-    for(string linha; getline(entrada,linha);){
-        int maxLin = strlen(linha.c_str());
-        char *c = new char[maxLin+1];
-        strcpy(c, linha.c_str());
-        for(int i = 0; i <= maxLin; i++){
-            while(c[i]!= ' ' && i <= maxLin){
-                numero += c[i];
-                i++;
-            }
-            fila.push(atoi(numero.c_str()));
-            numero = "";
-        }
-        if(g == NULL){
-            cout << "Grafo direcionado? Sim = 1 / Nao = 0" << endl;
-            cin >> direcionado;
-            cout << endl;
-            cout << "Arestas Ponderadas? Sim = 1 / Nao = 0" << endl;
-            cin >> ponderado;
-            cout << endl;
-            cout << "Pesos nos vertices? Sim = 1 / Nao = 0" << endl;
-            cin >> peso;
-            cout << endl;
-            g = new grafo(direcionado,ponderado,peso,fila.front());
-            fila.pop();
-        }
-        else if(!fila.empty()){
-            int no1 = fila.front(), no2;
-            fila.pop();
-            while(!fila.empty())
-            {
-                no2 = fila.front();
-                g->adicionaAresta(no1,no2);
-                fila.pop();
-            }
-        }
-    }
-    cout << "Fim leitura arquivo" << endl;
-    entrada.close();
-    return g;
-}
 
 int main(int argc, char ** argv)
 {
-    int arnaldo=2;
-
-
-    grafo teste(0,1,1,10);
-
-    teste.adicionaArestaPeso(0,5,7);
-    teste.adicionaArestaPeso(5,9,3);
-    teste.adicionaArestaPeso(2,3,7);
-    teste.adicionaArestaPeso(3,4,7);
-
-    teste.imprimeArestaPeso();
-
-    //teste.imprimeArestaPeso();
-
-    cout << endl;
-    cout << endl;
-    teste.letraD(0,9);
-
-
-
-
-
-    grafo *teste2 = leituraArquivo();
-
-    teste2->imprime();
+    int status;
+    grafo *teste = leituraArquivo();
+    while(status!=0)
+    {
+        cout<<"///////////////////////////// MENU DE INTERACAO ////////////////////////"<<endl;
+        cout<<" 1 - interacao ""a"" (fecho transitivo direto)"<<endl;
+        cout<<" 2 - interacao ""b"" (fecho transitivo indireto"<<endl;
+        cout<<" 3 - interacao ""c"" (caminho minimo por djkstra)"<<endl;
+        cout<<" 4 - interacao ""d"" (caminho minimo por floyd)"<<endl;
+        cout<<" 5 - interacao ""e"" (arvore geradora minima vertice-induzido por x usando Prim)"<<endl;
+        cout<<" 6 - interacao ""f"" (arvore geradora minima  vertice-induzido por x usando Kruskal)"<<endl;
+        cout<<" 7 - interacao ""g"" (a arvore dada pela ordem de caminhamento em profundidade a partir de no dado parametro,destacando as arestas de retorno)"<<endl;
+        cout<<" 8 - interacao ""h"" (uma ordenaçao topologica em D ou a informaçao de que D nao e um grafo aciclico direcionado)"<<endl;
+        cout<<" 0 - sair"<<endl;
+        cin>>status;
+        switch ( status )
+        {
+        case 1 :{
+            // letra a
+            teste->letraA(6);
+            break;
+        }
+        case 2 :{
+            // letra b
+            teste->letraB(6);
+            break;
+        }
+        case 3 :{
+            //letra c
+            break;
+        }
+        case 4 :{
+            //letra d
+            break;
+        }
+        case 5 :{
+            //letra e
+            int v[] = {6,8,12,13,17,29,116};
+            teste->letraE(v);
+            break;
+        }
+        case 6 :{
+            //letra f
+            break;
+        }
+        case 7 :{
+            //letra g
+            break;
+        }
+        case 8 :{
+            //letra h
+            break;
+        }
+        case 0 :{
+            status=0;
+        }
+            break;
+        default :
+            break;
+        }
+    }
 
     cout << "\t--/--"<<endl;
 
-    cout << "Inicio escrita arquivo" << endl;
-    ofstream saida;
-    saida.open("Saida.txt");
-    if(saida.is_open())
-    {
-        //teste2->imprimeEmDot(&saida);
-        teste.imprimeEmDot(&saida);
-
-        /*saida << "Tamanho: " << teste2->getTam() << endl;
-        ListaEnc *v = teste2->getVert();
-        for(int i = 0; i < teste2->getTam(); i++){
-            if(!v[i].vazia()){
-                cout << i << " -- ";
-                for(int k = 0, tam = v[i].tamanho(); k < tam; k++)
-                {
-                    int item = v[i].get(k);
-                    cout << item;
-                    saida << item;
-                    if(k != tam-1){
-                        cout << " --> ";
-                        saida << " --> ";
-                    }
-                }
-                cout << endl;
-                saida << endl;
-            }
-        }*/
-    }
-    else cout << "Problema ao criar arquivo" << endl;
-    saida.close();
-    cout << "Fim escrita arquivo" << endl;
-
-    if(teste.getTemArestaPonderada() == 0)
-    {
-        cout << "deu";
-    }
-
-    delete teste2;
-
+    delete teste;
     return 0;
 }
