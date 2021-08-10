@@ -33,14 +33,22 @@ public:
     void imprimeArestaPeso();
     void alteraPesoAresta(int no1,int no2,int peso);
     int retornaPesoAresta(int no1,int no2);
-    void letraA(int id);
-    void letraB(int id);
+    void letraA(ofstream *saida, int id);
+    void letraB(ofstream *saida,int id);
     void converteListaMatrizAB(bool **matriz);
-    void letraD(int no1,int no2); ////// https://pt.wikipedia.org/wiki/Algoritmo_de_Floyd-Warshall
-    void letraC(int no1,int no2);///////https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dijkstra.html
-    void letraE(ListaEnc* vet);
+    int letraD(int no1,int no2); ////// https://pt.wikipedia.org/wiki/Algoritmo_de_Floyd-Warshall
+    int letraC(int no1,int no2);///////https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dijkstra.html
+    int minVetor(int *dist,bool *esta);
+    void letraE(ofstream *saida,ListaEnc* vet);
+    void letraF(ofstream *saida, ListaEnc *vet);
+    void letraG(ofstream *saida, int id);
+    ListaEnc* recursivoG(int id, ListaEnc *sol, bool *vis);
+    int contaArestas();
     int getTemArestaPonderada();
     int getEhDirecionado();
     int getTemPesoNosVertices();
-    void imprimeEmDot(ListaEnc* solucao);
+    void imprimeEmDot(ofstream *saida,ListaEnc* solucao);
+    void imprimeEmDotTela(ListaEnc* solucao);
+    void imprimeArestaModelo(ofstream *saida,int no1,int no2,int caminho);
+    void imprimeArestaModeloTela(int no1,int no2,int caminho);
 };
