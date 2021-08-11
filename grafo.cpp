@@ -667,7 +667,6 @@ void grafo::letraE(ofstream *saida,ListaEnc *vet)
         solucao->insereInicio(vet->get(k));
     }
 
-    cout<<solucao->tamanho()<<endl;
     conectados->insereInicio(vet->get(0));
     while(conectados->tamanho() < solucao->tamanho())
     {
@@ -677,10 +676,8 @@ void grafo::letraE(ofstream *saida,ListaEnc *vet)
             {
                 if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
                 {
-                    cout<<"entrou1"<<endl;
                     if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < arestaMin[2])
                     {
-                        cout<<"entrou2"<<endl;
                         arestaMin[0] = i;
                         arestaMin[1] = j;
                         arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
@@ -688,14 +685,13 @@ void grafo::letraE(ofstream *saida,ListaEnc *vet)
                 }
             }
         }
-        cout<<"add"<<arestaMin[0]<<","<<arestaMin[1]<<","<<arestaMin[2]<<endl;
         sub->adicionaArestaPeso(arestaMin[0],arestaMin[1],arestaMin[2]);
         conectados->insereInicio(arestaMin[1]);
         arestaMin[2] = INFINITO;
     }
-    //sub->imprime();
+
     sub->imprimeEmDot(saida,solucao);
-    sub->imprime();
+    sub->imprimeEmDotTela(solucao);
 }
 
 int grafo::contaArestas(){
