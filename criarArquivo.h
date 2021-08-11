@@ -6,7 +6,7 @@ grafo* leituraArquivo()
     int eDirecionado;
     int eArestaPonderada;
     int eVerticePonderado;
-    cout << "Digite nome do arquivo .txt:" << endl;
+    cout << "Digite nome do arquivo .txt(com o .txt no final):" << endl;
     string arquivo;
     cin >> arquivo;
     cout << endl;
@@ -19,7 +19,6 @@ grafo* leituraArquivo()
     cout << "Tem vertice ponderado? 1-Sim  0-Nao:" << endl;
     cin >> eVerticePonderado;
     cout << endl;
-    arquivo += ".txt";
     entrada.open(arquivo.c_str());
     if(!entrada){
         abort();
