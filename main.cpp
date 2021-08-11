@@ -37,14 +37,23 @@ int main(int argc, char ** argv)
         case 1 :{
             // letra a
             saida << "////////// LETRA a /////////////////"<<endl;
-            teste->letraA(&saida, 6);
+            int entrada;
+            cout<<"Digite o ID do vertice desejado:"<<endl;
+            cin>>entrada;
+            cout<<endl;
+
+            teste->letraA(&saida, entrada);
             saida << endl<<"////////////////////////////////////"<<endl;
             break;
         }
         case 2 :{
             // letra b
             saida << "////////// LETRA b /////////////////"<<endl;
-            teste->letraB(&saida,6);
+            int entrada;
+            cout<<"Digite o ID do vertice desejado:"<<endl;
+            cin>>entrada;
+            cout<<endl;
+            teste->letraB(&saida,entrada);
             saida <<endl<< "////////////////////////////////////"<<endl;
             break;
         }
@@ -82,11 +91,17 @@ int main(int argc, char ** argv)
         case 5 :{
             //letra e
             ListaEnc *vet = new ListaEnc();
-            int v[] = {6,8,12,13,17,29,49,116};
-            for(int k = 0; k < 8; k++)
-                {
-                    vet->insereInicio(v[k]);
-                }
+            int entrada;
+            cout<<"Digite o ID do vertice para adicionar ao subconjunto, ou -1 para dar continuidade:"<<endl;
+            cin>>entrada;
+            cout<<endl;
+            while(entrada!=-1)
+            {
+                vet->insereFinal(entrada);
+                cout<<"Digite o ID do vertice adicionar ao subconjunto, ou -1 para dar continuidade"<<endl;
+                cin>>entrada;
+                cout<<endl;
+            }
             teste->letraE(&saida,vet);
             break;
         }
@@ -96,7 +111,11 @@ int main(int argc, char ** argv)
         }
         case 7 :{
             //letra g
-            teste->letraG(&saida, 6);
+            int entrada;
+            cout<<"Digite o ID do vertice desejado:"<<endl;
+            cin>>entrada;
+            cout<<endl;
+            teste->letraG(&saida, entrada);
             break;
         }
         case 8 :{
