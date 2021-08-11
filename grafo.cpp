@@ -711,7 +711,6 @@ void grafo::letraF(ofstream *saida, ListaEnc *vet){
 
     for(int k = 0; k < vet->tamanho(); k++)
     {
-        solucao->insereInicio(vet->get(k));
     }
 
 }
@@ -757,3 +756,76 @@ int grafo::getTemPesoNosVertices()
     return pesoNosVertices;
 }
 
+void grafo::letraH(ofstream *saida)
+{
+    int entrada =0;
+    int* grau_e = new int[tamanho];
+    for(int i =0; i<tamanho;i++)
+    {
+        grau_e[i]=0;
+    }
+    for(int i=0; i<tamanho;i++)
+    {
+        for(int j=0; j<vertices[i].tamanho();j++)
+        {
+            if(vertices[i].existe(j))
+            {
+                grau_e[vertices[i].get(j)]+=1;
+            }
+        }
+    }
+    for(int i =0; i<tamanho;i++)
+    {
+        if(grau_e[i]==0)
+        {
+            entrada = i;
+            auxH(saida,entrada);
+            return;
+        }
+        cout<<"grafo nao e aciclico"<<endl;
+    }
+
+    return;
+}
+
+void grafo::auxH(ofstream *saida, int id){
+    ListaEnc *arvore = new ListaEnc();
+    bool *visitados = new  bool[tamanho];
+    for(int i = 0; i < tamanho; i++){
+        visitados[i] = false;
+    }
+    arvore = recursivoH(id,arvore,visitados);
+    if(arvore!=NULL)
+    {
+        cout<<"Ordenacao topologica:"<<endl;
+        arvore->mostrar();
+        imprimeEmDot(saida, arvore);
+        imprimeEmDotTela(arvore);
+    }
+    else
+        cout<<"grafo nao e aciclico"<<endl;
+
+}
+
+ListaEnc* grafo::recursivoH(int id, ListaEnc *sol, bool *vis){
+    if(sol!=NULL)
+    {
+         vis[id] = true;
+        sol->insereFinal(id);
+
+        for(int i = 0; i < vertices[id].tamanho(); i++){
+            if(!vis[vertices[id].get(i)]){
+                recursivoH(vertices[id].get(i),sol,vis);
+            }
+            else
+            {
+                sol = NULL;
+                return sol;
+            }
+            }
+    }
+    else
+        cout<<"sol NULL"<<endl;
+
+    return  sol;
+}
