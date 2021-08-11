@@ -101,6 +101,7 @@ int main(int argc, char ** argv)
         }
         case 8 :{
             //letra h
+            teste->letraH(&saida);
             break;
         }
         case 0 :{

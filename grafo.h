@@ -43,6 +43,9 @@ public:
     void letraF(ofstream *saida, ListaEnc *vet);
     void letraG(ofstream *saida, int id);
     ListaEnc* recursivoG(int id, ListaEnc *sol, bool *vis);
+    void letraH(ofstream *saida);
+    void auxH(ofstream *saida, int id);
+    ListaEnc* recursivoH(int id, ListaEnc *sol, bool *vis);
     int contaArestas();
     int getTemArestaPonderada();
     int getEhDirecionado();
