@@ -1,0 +1,8 @@
+Infelizmente tivemos problemas e não conseguimos implementar a passagem dos parametros 
+ via linha de comando na execução,essas informações serão pedidas no inicio da execução 
+ do programa,programa esse que pode ser compilado com os seguintes comandos padrões no diretorio:
+
+	compilar:g++ *.cpp -o main -g
+	rodar: ./main 
+Lembrando que devido a não implementação dos parametros via linha de comando necessitamos que o 
+ arquivo de entrada do grafo esteja na pasta do projeto
