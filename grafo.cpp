@@ -844,3 +844,76 @@ ListaEnc* grafo::recursivoH(int id, ListaEnc *sol, bool *vis){
 
     return  sol;
 }
+
+void grafo::aGMG()
+{
+    int custoSol = 0;
+    ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc();
+    int arestaMin[] = {INFINITO,INFINITO,INFINITO};
+
+    for(int k = 0; k < tamanho; k++)
+    {
+        solucao->insereInicio(k);
+    }
+
+    conectados->insereInicio(0);
+    while(conectados->tamanho() < solucao->tamanho())
+    {
+        for(int i = 0; i < tamanho; i++)
+        {
+            for(int j = 0; j < tamanho; j++)
+            {
+                if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
+                {
+                    if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < arestaMin[2])
+                    {
+                        arestaMin[0] = i;
+                        arestaMin[1] = j;
+                        arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+                    }
+                }
+            }
+        }
+        custoSol += arestaMin[2];
+        conectados->insereInicio(arestaMin[1]);
+        arestaMin[2] = INFINITO;
+    }
+    cout << "Custo da solução com algoritmo guloso:" << custoSol << endl;
+}
+
+void grafo::aGM()
+{
+    int custoSol = 0;
+    ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc();
+    int arestaMin[] = {INFINITO,INFINITO,INFINITO};
+    bool grupoVisitado[] = new bool[grupos->tamanho()]
+
+    for(int k = 0; k < tamanho; k++)
+    {
+        solucao->insereInicio(k);
+    }
+
+    conectados->insereInicio(0);
+    while(conectados->tamanho() < solucao->tamanho())
+    {
+        for(int i = 0; i < tamanho; i++)
+        {
+            for(int j = 0; j < tamanho; j++)
+            {
+                if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
+                {
+                    if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < arestaMin[2])
+                    {
+                        arestaMin[0] = i;
+                        arestaMin[1] = j;
+                        arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+                    }
+                }
+            }
+        }
+        custoSol += arestaMin[2];
+        conectados->insereInicio(arestaMin[1]);
+        arestaMin[2] = INFINITO;
+    }
+    cout << "Custo da solução com algoritmo guloso:" << custoSol << endl;
+}
