@@ -1,4 +1,52 @@
-grafo* leituraArquivo()
+using namespace std;
+int leAteEsp(int inicio,string *text,string *alvo){
+    for(int i=inicio;text[i]!=" ";i++){
+        *alvo+=text[i];
+        if(text[i]==" ")
+            cout<<"DEU ERRADO TEM ESPACO NA STRING"<<endl;
+    }
+
+}
+int determinaTamanho(string entrada){
+    string aux="";
+    for(int i=0;entrada[i]!='.';i++){
+        if(isdigit(entrada[i]))
+            aux+=entrada[i];
+        else{
+            aux="";
+        }
+    }
+    return stoi(aux);
+}
+int determinaQuantosGrupos(string entrada){
+    string aux="";
+    int i=0;
+    while(isdigit(entrada[i])){
+        aux+=entrada[i];
+        i++;
+    }
+    return stoi(aux);
+}
+void determinaAresta(string text,int *dado1,int *dado2,int *dado3){
+    string aux="";
+    int i;
+    for(i=0;text[i]!=' ';i++){
+        aux+=text[i];
+    }
+    *dado1=stoi(aux);
+    aux="";
+    for(i++;text[i]!=' ';i++){
+        aux+=text[i];
+    }
+    *dado2=stoi(aux);
+    aux="";
+    for(i++;i<text.size();i++){
+        aux+=text[i];
+    }
+    *dado3=stoi(aux);
+
+}
+/*grafo* leituraArquivo(string caminhoArquivo)
 {
     cout << "Inicio leitura do arquivo" << endl;
     ifstream entrada;
@@ -6,20 +54,10 @@ grafo* leituraArquivo()
     int eDirecionado;
     int eArestaPonderada;
     int eVerticePonderado;
-    cout << "Digite nome do arquivo .txt(com o .txt no final):" << endl;
-    string arquivo;
-    cin >> arquivo;
-    cout << endl;
-    cout << "E direcionado? 1-Sim  0-Nao:" << endl;
-    cin >> eDirecionado;
-    cout << endl;
-    cout << "Tem aresta ponderada? 1-Sim  0-Nao:" << endl;
-    cin >> eArestaPonderada;
-    cout << endl;
-    cout << "Tem vertice ponderado? 1-Sim  0-Nao:" << endl;
-    cin >> eVerticePonderado;
-    cout << endl;
-    entrada.open(arquivo.c_str());
+    eDirecionado=0;
+    eArestaPonderada=1;
+    eVerticePonderado=0;
+    entrada.open(caminhoArquivo);
     if(!entrada){
         abort();
     }
@@ -29,7 +67,8 @@ grafo* leituraArquivo()
         int maxLin = strlen(linha.c_str());
         char *c = new char[maxLin+1];
         strcpy(c, linha.c_str());
-        for(int i = 0; i <= maxLin; i++){
+
+       /* for(int i = 0; i <= maxLin; i++){
             while(c[i]!= ' ' && i <= maxLin){
                 numero += c[i];
                 i++;
@@ -37,8 +76,11 @@ grafo* leituraArquivo()
             fila.push(atoi(numero.c_str()));
             numero = "";
         }
+        */
+/*
         if(g == NULL){
-            g = new grafo(eDirecionado,eArestaPonderada,eVerticePonderado, fila.front());
+            g = new grafo(eDirecionado,eArestaPonderada,eVerticePonderado,TAMANHO);//fila.front()
+
             fila.pop();
         }
 
@@ -66,6 +108,51 @@ grafo* leituraArquivo()
         }
     }
     cout << "Fim leitura arquivo" << endl;
+    entrada.close();
+    return g;
+}
+*/
+grafo* leituraArquivoNovo(string caminhoArquivo)
+{
+    cout << "Inicio leitura do arquivo" << endl;
+    ifstream entrada;
+    grafo *g = NULL;
+    int eDirecionado=0;
+    int eArestaPonderada=1;
+    int eVerticePonderado=0;
+    int quantosVertices=0,quantosGrupos=0,i=0;
+    string linha;
+    int dado1,dado2,dado3;
+    eDirecionado=0;
+    eArestaPonderada=1;
+    eVerticePonderado=0;
+    entrada.open(caminhoArquivo);
+    
+    if(!entrada){
+        abort();
+    }
+    
+    quantosGrupos=determinaQuantosGrupos(caminhoArquivo);
+    quantosVertices=determinaTamanho(caminhoArquivo);
+    g = new grafo(eDirecionado,eArestaPonderada,eVerticePonderado,quantosVertices,quantosGrupos);
+    getline(entrada,linha);
+    //cout<<dado1;
+    
+    while(linha!=""){
+        g->adicionaVerticeGrupo(i,stoi(linha));
+        getline(entrada,linha);
+        i++;
+    }
+    
+    
+    while (!entrada.eof()){ //enquanto end of file for false continua
+        getline(entrada,linha);
+        if(linha!=""){
+            determinaAresta(linha,&dado1,&dado2,&dado3);
+            g->adicionaArestaPeso(dado1,dado2,dado3);
+        }
+      }
+    cout<<"fim da leitura do arquivo"<<endl;
     entrada.close();
     return g;
 }

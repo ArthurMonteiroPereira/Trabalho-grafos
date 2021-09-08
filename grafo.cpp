@@ -24,6 +24,21 @@ grafo::grafo(int eDirecionado,int eArestaPonderada,int ePesoNosVertices,int tam)
             pesoV[i]=0;
     }
 }
+grafo::grafo(int eDirecionado,int eArestaPonderada,int ePesoNosVertices,int tam,int qntGrupos)
+{
+    direcionado=eDirecionado;
+    arestaPonderada=eArestaPonderada;
+    pesoNosVertices=ePesoNosVertices;
+    tamanho = tam;
+    vertices = new ListaEnc[tam];
+    if(ePesoNosVertices==1)
+    {
+        pesoV = new int[tam];
+        for(int i=0; i<tam; i++)
+            pesoV[i]=0;
+    }
+    grupos = new ListaEnc[qntGrupos+1];
+}
 grafo::grafo(int tam)
 {
     direcionado=0;
@@ -298,6 +313,10 @@ void grafo::adicionaArestaPeso(int no1,int no2,int peso)
         vertices[no1].insereInicio(no2);
         vertices[no1].setPeso(0,peso);
     }
+}
+
+void grafo::adicionaVerticeGrupo(int vertice,int qualGrupo){
+    grupos[qualGrupo].insereInicio(vertice);
 }
 
 void grafo::removeAresta(int no1,int no2)

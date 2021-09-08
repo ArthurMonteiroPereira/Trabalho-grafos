@@ -17,12 +17,15 @@ private:
     int *pesoV;
     void converteListaMatrizD(int **matriz); //conerte a lista de adjacencia em uma matriz de adjacencia com o peso das arestas
     void imprimeMatriz(); //função usada para testes internos
+    ListaEnc *grupos;
 public:
     grafo(int tam);
     grafo(int direcionado,int arestaPonderada,int pesoNosVertices,int tam);
+    grafo(int direcionado,int arestaPonderada,int pesoNosVertices,int tam,int qntGrupos);
     ~grafo();
     bool existeAresta(int no1,int no2);
     void imprime();
+    void adicionaVerticeGrupo(int vertice,int grupo);
     void adicionaAresta(int no1,int no2);
     void adicionaArestaPeso(int no1,int no2,int peso);
     void removeAresta(int no1,int no2);
