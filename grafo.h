@@ -18,6 +18,7 @@ private:
     void converteListaMatrizD(int **matriz); //conerte a lista de adjacencia em uma matriz de adjacencia com o peso das arestas
     void imprimeMatriz(); //função usada para testes internos
     ListaEnc *grupos;
+    int numeroDeGrupos;
 public:
     grafo(int tam);
     grafo(int direcionado,int arestaPonderada,int pesoNosVertices,int tam);
@@ -57,5 +58,5 @@ public:
     void imprimeEmDotTela(ListaEnc* solucao);
     void imprimeArestaModelo(ofstream *saida,int no1,int no2,int caminho);
     void imprimeArestaModeloTela(int no1,int no2,int caminho);
-    void aGMG();
+    int aGMG();
 };

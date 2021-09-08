@@ -9,23 +9,27 @@
 #include <cstring>
 #include <queue>
 #include "criarArquivo.h"
+#include <ctime>
 using namespace std;
 
 
 
 int main(int argc, char *argv[])
-{
-    int status;
+{   
+    clock_t start, end;
+    int retorno;
     int aux1,aux2,aux3;
     ofstream saida;
     grafo *teste = leituraArquivoNovo(argv[2]);
-    cout<<"certo";
     saida.open(argv[3]);
     
     switch ( stoi(argv[1]) )
     {
     case 1 :{
-        // letra a
+        start =clock();
+        retorno =teste->aGMG();
+        end=clock();
+        cout << "Custo da solucao com algoritmo guloso:" << retorno <<" e levou:"<<float(end-start)/CLOCKS_PER_SEC<<"segundos"<< endl;
         break;
     }
     case 2 :{

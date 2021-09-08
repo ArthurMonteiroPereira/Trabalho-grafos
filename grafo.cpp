@@ -38,6 +38,7 @@ grafo::grafo(int eDirecionado,int eArestaPonderada,int ePesoNosVertices,int tam,
             pesoV[i]=0;
     }
     grupos = new ListaEnc[qntGrupos+1];
+    numeroDeGrupos=qntGrupos+1;
 }
 grafo::grafo(int tam)
 {
@@ -845,50 +846,16 @@ ListaEnc* grafo::recursivoH(int id, ListaEnc *sol, bool *vis){
     return  sol;
 }
 
-void grafo::aGMG()
+
+
+int grafo::aGMG()
 {
     int custoSol = 0;
     ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc();
     int arestaMin[] = {INFINITO,INFINITO,INFINITO};
+    bool *grupoVisitado = new bool[numeroDeGrupos];
 
-    for(int k = 0; k < tamanho; k++)
-    {
-        solucao->insereInicio(k);
-    }
-
-    conectados->insereInicio(0);
-    while(conectados->tamanho() < solucao->tamanho())
-    {
-        for(int i = 0; i < tamanho; i++)
-        {
-            for(int j = 0; j < tamanho; j++)
-            {
-                if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
-                {
-                    if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < arestaMin[2])
-                    {
-                        arestaMin[0] = i;
-                        arestaMin[1] = j;
-                        arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
-                    }
-                }
-            }
-        }
-        custoSol += arestaMin[2];
-        conectados->insereInicio(arestaMin[1]);
-        arestaMin[2] = INFINITO;
-    }
-    cout << "Custo da solução com algoritmo guloso:" << custoSol << endl;
-}
-
-void grafo::aGMG()
-{
-    int custoSol = 0;
-    ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc();
-    int arestaMin[] = {INFINITO,INFINITO,INFINITO};
-    bool grupoVisitado[] = new bool[grupos->tamanho()];
-
-    for(int i =0; k< grupos->tamanho(); i++)
+    for(int i =0; i< grupos->tamanho(); i++)
     {
         grupoVisitado[i] = false;
     }
@@ -904,7 +871,7 @@ void grafo::aGMG()
         {
             for(int j = 0; j < tamanho; j++)
             {
-                for(int k = 0; k < grupos->tamanho(); k++)
+                for(int k = 1; k <= grupos->tamanho(); k++)
                 {
                     if(vertices[i].existe(j) && solucao->existe(j) && grupos[k].existe(j) && solucao->existe(i) && conectados->existe(i) && !grupoVisitado[k])
                     {
@@ -922,5 +889,6 @@ void grafo::aGMG()
         conectados->insereInicio(arestaMin[1]);
         arestaMin[2] = INFINITO;
     }
-    cout << "Custo da solução com algoritmo guloso:" << custoSol << endl;
+    //cout << "Custo da solução com algoritmo guloso:" << custoSol << endl;
+    return custoSol;
 }
