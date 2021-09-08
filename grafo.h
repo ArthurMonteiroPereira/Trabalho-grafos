@@ -57,4 +57,5 @@ public:
     void imprimeEmDotTela(ListaEnc* solucao);
     void imprimeArestaModelo(ofstream *saida,int no1,int no2,int caminho);
     void imprimeArestaModeloTela(int no1,int no2,int caminho);
+    void aGMG();
 };
