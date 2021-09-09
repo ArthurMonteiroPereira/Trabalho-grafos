@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     {
     case 1 :{
         start =clock();
-        retorno =teste->aGMG();
+        retorno=teste->aGM();
         end=clock();
         cout << "Custo da solucao com algoritmo guloso:" << retorno <<" e levou:"<<float(end-start)/CLOCKS_PER_SEC<<"segundos"<< endl;
         break;

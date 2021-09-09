@@ -845,50 +845,66 @@ ListaEnc* grafo::recursivoH(int id, ListaEnc *sol, bool *vis){
 
     return  sol;
 }
+int grafo::grupoVerticeX(int x){
+    for(int i = 0; i < numeroDeGrupos; i++){
+        if(grupos[i].existe(x))
+            return i;
+    }
+}
 
 
-
-int grafo::aGMG()
+int  grafo::aGM()
 {
+    int status;
     int custoSol = 0;
     ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc();
     int arestaMin[] = {INFINITO,INFINITO,INFINITO};
-    bool *grupoVisitado = new bool[numeroDeGrupos];
-
-    for(int i =0; i< grupos->tamanho(); i++)
-    {
-        grupoVisitado[i] = false;
+    bool *visitados = new  bool[numeroDeGrupos];
+    for(int i = 0; i < numeroDeGrupos; i++){
+        visitados[i]=false;
     }
 
     for(int k = 0; k < tamanho; k++)
     {
         solucao->insereInicio(k);
     }
+
     conectados->insereInicio(0);
-    while(conectados->tamanho() < solucao->tamanho())
+    visitados[grupoVerticeX(0)]=true;
+    while(status!=numeroDeGrupos)
     {
+        status=0;
         for(int i = 0; i < tamanho; i++)
         {
             for(int j = 0; j < tamanho; j++)
-            {
-                for(int k = 1; k <= grupos->tamanho(); k++)
+            {   
+                if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
                 {
-                    if(vertices[i].existe(j) && solucao->existe(j) && grupos[k].existe(j) && solucao->existe(i) && conectados->existe(i) && !grupoVisitado[k])
-                    {
+                    if(visitados[grupoVerticeX(j)]==false){
                         if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < arestaMin[2])
                         {
                             arestaMin[0] = i;
                             arestaMin[1] = j;
                             arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+
                         }
                     }
                 }
             }
         }
+
         custoSol += arestaMin[2];
         conectados->insereInicio(arestaMin[1]);
         arestaMin[2] = INFINITO;
+        visitados[grupoVerticeX(arestaMin[1])]=true;
+        //cout<<custoSol<<endl;
+        for(int i=1;i<numeroDeGrupos;i++){
+            if(visitados[i]==true){
+                status=status+1;
+            }
+        }
+        status++;
     }
-    //cout << "Custo da solução com algoritmo guloso:" << custoSol << endl;
+    //cout << "Custo da solucao com algoritmo guloso:" << custoSol << endl;
     return custoSol;
 }
