@@ -754,8 +754,9 @@ ListaEnc* grafo::recursivoG(int id, ListaEnc *sol, bool *vis){
     return  sol;
 }
 
-bool grafo::existeAresta(int no1,int no2) {}
+bool grafo::existeAresta(int no1,int no2) {
 
+}
 
 int grafo::getTemArestaPonderada()
 {
@@ -924,4 +925,126 @@ int  grafo::aGM()
     }
     //cout << "Custo da solucao com algoritmo guloso:" << custoSol << endl;
     return custoSol;
+}
+
+int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES CANDIDATOS
+{
+    int status = 0;
+    float alfa;
+    int trueCustoSol = INFINITO;
+    int custoSol = 0;
+
+    for(int m =0; m < 10; m++)
+    {
+        status = 0;
+        custoSol = 0;
+        int grupoComeco = (rand() % numeroDeGrupos-1)+1;
+        ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc(); 
+        int arestaMin[] = {INFINITO,INFINITO,INFINITO};
+        int arestaMax[] = {0,0,0};
+        bool *visitados = new  bool[numeroDeGrupos];
+
+        for(int i = 0; i < numeroDeGrupos; i++){
+            visitados[i]=false;
+        }
+
+        for(int k = 0; k < tamanho; k++)
+        {
+            solucao->insereInicio(k);
+        }
+    
+        for(int i=0;i<grupos[grupoComeco].tamanho();i++){
+            for(int j = 0; j < vertices[getXgrupoY(i,grupoComeco)].tamanho(); j++){
+                if(vertices[grupos[grupoComeco].get(i)].getPeso(j)<=arestaMin[2] && grupoVerticeX(j)!=grupoVerticeX(i)){
+                    arestaMin[0] = i;
+                    arestaMin[1] = j;
+                    arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+                }
+            }
+
+        }
+        conectados->insereInicio(arestaMin[0]);
+        conectados->insereInicio(arestaMin[1]);
+        custoSol += arestaMin[2];
+        arestaMin[2] = INFINITO;
+        visitados[grupoVerticeX(arestaMin[0])]=true;
+        visitados[grupoVerticeX(arestaMin[1])]=true;
+
+        while(status!=numeroDeGrupos)
+        {
+            status=0;
+
+
+            for(int i = 0; i < tamanho; i++)
+            {
+                for(int j = 0; j < tamanho; j++)
+                {   
+                    if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
+                    {
+                        if(visitados[grupoVerticeX(j)]==false){
+                            if(vertices[i].getPeso(vertices[i].existeRetorna(j)) <= arestaMin[2])
+                            {
+                                arestaMin[0] = i;
+                                arestaMin[1] = j;
+                                arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+                            }
+                        }
+                    }
+                }
+            }
+            
+            for(int i = 0; i < tamanho; i++)
+            {
+                for(int j = 0; j < tamanho; j++)
+                {   
+                    if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
+                    {
+                        if(visitados[grupoVerticeX(j)]==false){
+                            if(vertices[i].getPeso(vertices[i].existeRetorna(j)) >= arestaMax[2])
+                            {
+                                arestaMax[0] = i;
+                                arestaMax[1] = j;
+                                arestaMax[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+                            }
+                        }
+                    }
+                }
+            }
+
+            for(int i = 0; i < tamanho; i++)
+            {
+                for(int j = 0; j < tamanho; j++)
+                {   
+                    if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
+                    {
+                        if(visitados[grupoVerticeX(j)]==false){
+                            if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < (arestaMin + (alfa * (arestaMax[2]-arestaMin[2]))))
+                            {
+                                // ADICIONAR NA LCR
+                            }
+                        }
+                    }
+                }
+            }
+            // Puxar um candidato da LCR
+            // adicionar o custo da aresta até o candidato na LCR
+            // adicionar o vértice de chegada novo a conectados
+            arestaMin[2] = INFINITO;
+            arestaMax[2] = 0;
+            //adicionar o grupo do vértice novo em visitados
+            
+            for(int i=1;i<numeroDeGrupos;i++){
+                if(visitados[i]==true){
+                    status=status+1;
+                }
+            }
+            status++;
+        }
+        //cout << "Custo da solucao com algoritmo guloso:" << custoSol << endl;
+        if (custoSol < trueCustoSol)
+        {
+            trueCustoSol = custoSol;
+        }
+    }
+    return trueCustoSol;
 }

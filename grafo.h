@@ -59,6 +59,7 @@ public:
     void imprimeArestaModelo(ofstream *saida,int no1,int no2,int caminho);
     void imprimeArestaModeloTela(int no1,int no2,int caminho);
     int aGM();
+    int aGMRand(float alfa);
     int grupoVerticeX(int x);
     int getXgrupoY(int x,int y);
 };
