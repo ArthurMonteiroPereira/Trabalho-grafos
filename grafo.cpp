@@ -859,6 +859,7 @@ int grafo::getXgrupoY(int x,int y){
 int  grafo::aGM()
 {
     int status;
+    
     int custoSol = 0;
     ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc();
     int arestaMin[] = {INFINITO,INFINITO,INFINITO};
@@ -930,6 +931,8 @@ int  grafo::aGM()
 int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES CANDIDATOS
 {
     int status = 0;
+    int seletor = 0;
+    int aux = -1;
     float alfa;
     int trueCustoSol = INFINITO;
     int custoSol = 0;
@@ -942,6 +945,12 @@ int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES
         ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc(); 
         int arestaMin[] = {INFINITO,INFINITO,INFINITO};
         int arestaMax[] = {0,0,0};
+        int* lCR = new int [tamanho];
+        for(int i=0; i<tamanho; i++)
+        {
+            lCR[i] = -1;
+        }
+
         bool *visitados = new  bool[numeroDeGrupos];
 
         for(int i = 0; i < numeroDeGrupos; i++){
@@ -973,7 +982,8 @@ int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES
         while(status!=numeroDeGrupos)
         {
             status=0;
-
+            seletor = 0;
+            aux = -1;
 
             for(int i = 0; i < tamanho; i++)
             {
@@ -1020,18 +1030,27 @@ int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES
                         if(visitados[grupoVerticeX(j)]==false){
                             if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < (arestaMin + (alfa * (arestaMax[2]-arestaMin[2]))))
                             {
-                                // ADICIONAR NA LCR
+                                lCR[j] = vertices[i].getPeso(vertices[i].existeRetorna(j));
                             }
                         }
                     }
                 }
             }
-            // Puxar um candidato da LCR
-            // adicionar o custo da aresta até o candidato na LCR
-            // adicionar o vértice de chegada novo a conectados
+            while(aux == -1)
+            {
+                seletor = (rand() % tamanho);
+                aux = lCR[seletor];
+            }
+            custoSol += aux;
+            conectados->insereInicio(seletor);
             arestaMin[2] = INFINITO;
             arestaMax[2] = 0;
-            //adicionar o grupo do vértice novo em visitados
+            visitados[grupoVerticeX(seletor)]=true;
+            
+            for(int i=0; i<tamanho; i++)
+            {
+                lCR[i] = -1;
+            }
             
             for(int i=1;i<numeroDeGrupos;i++){
                 if(visitados[i]==true){
