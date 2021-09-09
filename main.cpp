@@ -20,9 +20,7 @@ int main(int argc, char *argv[])
     int retorno;
     int aux1,aux2,aux3;
     ofstream saida;
-    grafo *teste = leituraArquivoNovo(argv[2]);
-    saida.open(argv[3]);
-    
+    grafo *teste = leituraArquivoNovo(argv[2]);   
     switch ( stoi(argv[1]) )
     {
     case 1 :{

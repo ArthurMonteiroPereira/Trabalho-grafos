@@ -115,6 +115,13 @@ void determinaAresta(string text,int *dado1,int *dado2,int *dado3){
 grafo* leituraArquivoNovo(string caminhoArquivo)
 {
     cout << "Inicio leitura do arquivo" << endl;
+    string aux;
+    int j;
+    for (j = caminhoArquivo.size()-1; caminhoArquivo[j] != '\\' && caminhoArquivo[j] !='/' && j!=-1; j--){
+    }
+    for (j++; j<caminhoArquivo.size(); j++){
+        aux+=caminhoArquivo[j];
+    }
     ifstream entrada;
     grafo *g = NULL;
     int eDirecionado=0;
@@ -129,11 +136,12 @@ grafo* leituraArquivoNovo(string caminhoArquivo)
     entrada.open(caminhoArquivo);
     
     if(!entrada){
+        cout<<"Error";
         abort();
     }
     
-    quantosGrupos=determinaQuantosGrupos(caminhoArquivo);
-    quantosVertices=determinaTamanho(caminhoArquivo);
+    quantosGrupos=determinaQuantosGrupos(aux);
+    quantosVertices=determinaTamanho(aux);
     g = new grafo(eDirecionado,eArestaPonderada,eVerticePonderado,quantosVertices,quantosGrupos);
     getline(entrada,linha);
     //cout<<dado1;

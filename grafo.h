@@ -60,4 +60,5 @@ public:
     void imprimeArestaModeloTela(int no1,int no2,int caminho);
     int aGM();
     int grupoVerticeX(int x);
+    int getXgrupoY(int x,int y);
 };

@@ -851,7 +851,9 @@ int grafo::grupoVerticeX(int x){
             return i;
     }
 }
-
+int grafo::getXgrupoY(int x,int y){
+   return grupos[y].get(x);
+}
 
 int  grafo::aGM()
 {
@@ -869,8 +871,23 @@ int  grafo::aGM()
         solucao->insereInicio(k);
     }
 
-    conectados->insereInicio(0);
-    visitados[grupoVerticeX(0)]=true;
+    for(int i=0;i<grupos[1].tamanho();i++){
+        for(int j = 0; j < vertices[getXgrupoY(i,1)].tamanho(); j++){
+            if(vertices[grupos[1].get(i)].getPeso(j)<arestaMin[2] && grupoVerticeX(j)!=grupoVerticeX(i)){
+                arestaMin[0] = i;
+                arestaMin[1] = j;
+                arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+            }
+        }
+
+    }
+    conectados->insereInicio(arestaMin[0]);
+    conectados->insereInicio(arestaMin[1]);
+    custoSol += arestaMin[2];
+    arestaMin[2] = INFINITO;
+    visitados[grupoVerticeX(arestaMin[0])]=true;
+    visitados[grupoVerticeX(arestaMin[1])]=true;
+
     while(status!=numeroDeGrupos)
     {
         status=0;
