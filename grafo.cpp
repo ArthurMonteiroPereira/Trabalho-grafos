@@ -856,7 +856,7 @@ int grafo::getXgrupoY(int x,int y){
    return grupos[y].get(x);
 }
 
-int  grafo::aGM()
+int  grafo::aGMG()
 {
     int status;
     
@@ -928,36 +928,23 @@ int  grafo::aGM()
     return custoSol;
 }
 
-int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES CANDIDATOS
+float  grafo::aGMGRand(float alfa)
 {
-    cout << "iniciando randomizado..."<<endl;
     int status = 0;
     int seletor = 0;
     int aux = -1;
-    int grupoComeco;
-    //float alfa;
-    int trueCustoSol = INFINITO;
+    float customedioSol = 0;
     int custoSol = 0;
-    ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc(); 
+
     for(int m =0; m < 10; m++)
     {
         status = 0;
         custoSol = 0;
-        grupoComeco = (rand() % (numeroDeGrupos-1));
-        grupoComeco++;
-        //grupoComeco++;
-        //grupoComeco=random(1,numeroDeGrupos-1);
+        int grupoComeco = (rand() % numeroDeGrupos-1)+1;
+        ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc(); 
         int arestaMin[] = {INFINITO,INFINITO,INFINITO};
         int arestaMax[] = {0,0,0};
         int* lCR = new int [tamanho];
-
-        while(!solucao->vazia()){
-            solucao->remover();
-        }
-        while(!conectados->vazia()){
-            conectados->remover();
-        }
-
         for(int i=0; i<tamanho; i++)
         {
             lCR[i] = -1;
@@ -973,10 +960,9 @@ int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES
         {
             solucao->insereInicio(k);
         }
-       
+    
         for(int i=0;i<grupos[grupoComeco].tamanho();i++){
             for(int j = 0; j < vertices[getXgrupoY(i,grupoComeco)].tamanho(); j++){
-                
                 if(vertices[grupos[grupoComeco].get(i)].getPeso(j)<=arestaMin[2] && grupoVerticeX(j)!=grupoVerticeX(i)){
                     arestaMin[0] = i;
                     arestaMin[1] = j;
@@ -991,22 +977,22 @@ int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES
         arestaMin[2] = INFINITO;
         visitados[grupoVerticeX(arestaMin[0])]=true;
         visitados[grupoVerticeX(arestaMin[1])]=true;
-        
+
         while(status!=numeroDeGrupos)
-        {   
+        {
             status=0;
             seletor = 0;
             aux = -1;
-            
+
             for(int i = 0; i < tamanho; i++)
             {
                 for(int j = 0; j < tamanho; j++)
                 {   
-                    if(vertices[i].existe(j) && !conectados->existe(j) && conectados->existe(i))
+                    if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
                     {
                         if(visitados[grupoVerticeX(j)]==false){
                             if(vertices[i].getPeso(vertices[i].existeRetorna(j)) <= arestaMin[2])
-                            {                   
+                            {
                                 arestaMin[0] = i;
                                 arestaMin[1] = j;
                                 arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
@@ -1020,7 +1006,7 @@ int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES
             {
                 for(int j = 0; j < tamanho; j++)
                 {   
-                    if(vertices[i].existe(j) &&  !conectados->existe(j)  && conectados->existe(i))
+                    if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
                     {
                         if(visitados[grupoVerticeX(j)]==false){
                             if(vertices[i].getPeso(vertices[i].existeRetorna(j)) >= arestaMax[2])
@@ -1033,33 +1019,27 @@ int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES
                     }
                 }
             }
-            
+
             for(int i = 0; i < tamanho; i++)
             {
                 for(int j = 0; j < tamanho; j++)
                 {   
-                    
-                    if(vertices[i].existe(j) &&  !conectados->existe(j)  && conectados->existe(i))
+                    if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
                     {
-                        
                         if(visitados[grupoVerticeX(j)]==false){
-                            
-                            if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < (arestaMin[2] + (alfa * (arestaMax[2]-arestaMin[2]))))
+                            if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < (float(arestaMin[2]) + (alfa * (arestaMax[2]-arestaMin[2]))))
                             {
-                                //cout<<"whileTes";
                                 lCR[j] = vertices[i].getPeso(vertices[i].existeRetorna(j));
                             }
                         }
                     }
                 }
             }
-            
             while(aux == -1)
             {
                 seletor = (rand() % tamanho);
                 aux = lCR[seletor];
             }
-            //cout<<"whileTes";
             custoSol += aux;
             conectados->insereInicio(seletor);
             arestaMin[2] = INFINITO;
@@ -1077,15 +1057,181 @@ int  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES
                 }
             }
             status++;
-            //cout<<"whileTes";
         }
-        //cout << "Custo da solucao com algoritmo guloso:" << custoSol << endl;
-        if (custoSol < trueCustoSol)
-        {
-            trueCustoSol = custoSol;
-        }
-        delete []visitados;
-        delete []lCR;
+        
+        
+        customedioSol += custoSol;
+        
     }
-    return trueCustoSol;
+    customedioSol = (customedioSol / 10);
+    return customedioSol;
+}
+
+float  grafo::aGMGRand2(float alfa)
+{
+    int status = 0;
+    int seletor = 0;
+    int aux = -1;
+    float custoMinSol = INFINITO;
+    int custoSol = 0;
+
+    for(int m =0; m < 10; m++)
+    {
+        status = 0;
+        custoSol = 0;
+        int grupoComeco = (rand() % numeroDeGrupos-1)+1;
+        ListaEnc *solucao = new ListaEnc(), *conectados = new ListaEnc(); 
+        int arestaMin[] = {INFINITO,INFINITO,INFINITO};
+        int arestaMax[] = {0,0,0};
+        int* lCR = new int [tamanho];
+        for(int i=0; i<tamanho; i++)
+        {
+            lCR[i] = -1;
+        }
+
+        bool *visitados = new  bool[numeroDeGrupos];
+
+        for(int i = 0; i < numeroDeGrupos; i++){
+            visitados[i]=false;
+        }
+
+        for(int k = 0; k < tamanho; k++)
+        {
+            solucao->insereInicio(k);
+        }
+    
+        for(int i=0;i<grupos[grupoComeco].tamanho();i++){
+            for(int j = 0; j < vertices[getXgrupoY(i,grupoComeco)].tamanho(); j++){
+                if(vertices[grupos[grupoComeco].get(i)].getPeso(j)<=arestaMin[2] && grupoVerticeX(j)!=grupoVerticeX(i)){
+                    arestaMin[0] = i;
+                    arestaMin[1] = j;
+                    arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+                }
+            }
+
+        }
+        conectados->insereInicio(arestaMin[0]);
+        conectados->insereInicio(arestaMin[1]);
+        custoSol += arestaMin[2];
+        arestaMin[2] = INFINITO;
+        visitados[grupoVerticeX(arestaMin[0])]=true;
+        visitados[grupoVerticeX(arestaMin[1])]=true;
+
+        while(status!=numeroDeGrupos)
+        {
+            status=0;
+            seletor = 0;
+            aux = -1;
+
+            for(int i = 0; i < tamanho; i++)
+            {
+                for(int j = 0; j < tamanho; j++)
+                {   
+                    if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
+                    {
+                        if(visitados[grupoVerticeX(j)]==false){
+                            if(vertices[i].getPeso(vertices[i].existeRetorna(j)) <= arestaMin[2])
+                            {
+                                arestaMin[0] = i;
+                                arestaMin[1] = j;
+                                arestaMin[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+                            }
+                        }
+                    }
+                }
+            }
+            
+            for(int i = 0; i < tamanho; i++)
+            {
+                for(int j = 0; j < tamanho; j++)
+                {   
+                    if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
+                    {
+                        if(visitados[grupoVerticeX(j)]==false){
+                            if(vertices[i].getPeso(vertices[i].existeRetorna(j)) >= arestaMax[2])
+                            {
+                                arestaMax[0] = i;
+                                arestaMax[1] = j;
+                                arestaMax[2] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+                            }
+                        }
+                    }
+                }
+            }
+
+            for(int i = 0; i < tamanho; i++)
+            {
+                for(int j = 0; j < tamanho; j++)
+                {   
+                    if(vertices[i].existe(j) && solucao->existe(j) && !conectados->existe(j) && solucao->existe(i) && conectados->existe(i))
+                    {
+                        if(visitados[grupoVerticeX(j)]==false){
+                            if(vertices[i].getPeso(vertices[i].existeRetorna(j)) < (float(arestaMin[2]) + (alfa * (arestaMax[2]-arestaMin[2]))))
+                            {
+                                lCR[j] = vertices[i].getPeso(vertices[i].existeRetorna(j));
+                            }
+                        }
+                    }
+                }
+            }
+            while(aux == -1)
+            {
+                seletor = (rand() % tamanho);
+                aux = lCR[seletor];
+            }
+            custoSol += aux;
+            conectados->insereInicio(seletor);
+            arestaMin[2] = INFINITO;
+            arestaMax[2] = 0;
+            visitados[grupoVerticeX(seletor)]=true;
+            
+            for(int i=0; i<tamanho; i++)
+            {
+                lCR[i] = -1;
+            }
+            
+            for(int i=1;i<numeroDeGrupos;i++){
+                if(visitados[i]==true){
+                    status=status+1;
+                }
+            }
+            status++;
+        }
+        
+        
+        if (custoSol < custoMinSol)
+        {
+            custoMinSol = custoSol;
+        }
+        
+    }
+    
+    return custoMinSol;
+}
+
+int  grafo::aGMGGRASP()
+{
+    float melhorCustoSol = INFINITO;
+    float custoFinal = INFINITO;
+    float melhorAlpha = 0;
+    float alpha[] = {0.05, 0.1, 0.15, 0.30, 0.50};
+    float custoSol = 0;
+    
+
+    for(int i=0; i<5; i++)
+    {
+        custoSol = aGMGRand(alpha[i]);
+
+        if (custoSol < melhorCustoSol)
+        {
+            melhorCustoSol = custoSol;
+            melhorAlpha = alpha[i];
+        }
+    }
+    while(custoFinal > melhorCustoSol)
+    {
+        custoFinal = aGMGRand2(melhorAlpha);
+    }
+
+    return custoFinal;
 }

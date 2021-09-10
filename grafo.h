@@ -58,8 +58,10 @@ public:
     void imprimeEmDotTela(ListaEnc* solucao);
     void imprimeArestaModelo(ofstream *saida,int no1,int no2,int caminho);
     void imprimeArestaModeloTela(int no1,int no2,int caminho);
-    int aGM();
-    int aGMRand(float alfa);
+    int aGMG();
+    float aGMGRand(float alfa);
+    float aGMGRand2(float alfa);
+    int aGMGGRASP();
     int grupoVerticeX(int x);
     int getXgrupoY(int x,int y);
 };
