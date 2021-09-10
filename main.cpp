@@ -16,6 +16,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {   
+    float alpha;
     clock_t start, end;
     int retorno;
     int aux1,aux2,aux3;
@@ -31,8 +32,36 @@ int main(int argc, char *argv[])
         break;
     }
     case 2 :{
-        // letra b
-
+        cout<<"----------rodando algotimo randomizado-----------------------"<<endl;
+        alpha=0.05;
+        start =clock();
+        retorno=teste->aGMRand(alpha);
+        end=clock();
+        cout << "Custo da solucao com algoritmo guloso randomizado e alpha="<<alpha<<" e:" << retorno <<" e levou:"<<float(end-start)/CLOCKS_PER_SEC<<"segundos"<< endl;
+        
+        alpha=0.1;
+        start =clock();
+        retorno=teste->aGMRand(alpha);
+        end=clock();
+        cout << "Custo da solucao com algoritmo guloso randomizado e alpha="<<alpha<<" e:" << retorno <<" e levou:"<<float(end-start)/CLOCKS_PER_SEC<<"segundos"<< endl;
+        
+        alpha=0.15;
+        start =clock();
+        retorno=teste->aGMRand(alpha);
+        end=clock();
+        cout << "Custo da solucao com algoritmo guloso randomizado e alpha="<<alpha<<" e:" << retorno <<" e levou:"<<float(end-start)/CLOCKS_PER_SEC<<"segundos"<< endl;
+        
+        alpha=0.30;
+        start =clock();
+        retorno=teste->aGMRand(alpha);
+        end=clock();
+        cout << "Custo da solucao com algoritmo guloso randomizado e alpha="<<alpha<<" e:" << retorno <<" e levou:"<<float(end-start)/CLOCKS_PER_SEC<<"segundos"<< endl;
+      
+        alpha=0.5;
+        start =clock();
+        retorno=teste->aGMRand(alpha);
+        end=clock();
+        cout << "Custo da solucao com algoritmo guloso randomizado e alpha="<<alpha<<" e:" << retorno <<" e levou:"<<float(end-start)/CLOCKS_PER_SEC<<"segundos"<< endl<<"--------------------------------"<<endl;
         break;
     }
     case 3 :{

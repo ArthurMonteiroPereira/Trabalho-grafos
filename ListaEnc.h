@@ -21,17 +21,17 @@ public:
         this->peso = 0;
     }
 
-    int obterValor() // obtém o valor
+    int obterValor() // obtï¿½m o valor
     {
         return v;
     }
 
-    No* obterProx() // obtém o próximo No
+    No* obterProx() // obtï¿½m o prï¿½ximo No
     {
         return prox;
     }
 
-    void setProx(No* p) // seta o próximo No
+    void setProx(No* p) // seta o prï¿½ximo No
     {
         prox = p;
     }
@@ -48,19 +48,19 @@ class ListaEnc
 {
 private:
     No* cabeca; // primeiro elemento
-    No* cauda; // último elemento
+    No* cauda; // ï¿½ltimo elemento
 
 public:
     ListaEnc()
     {
-        // se não passar elemento, então cabeca e cauda são NULL
+        // se nï¿½o passar elemento, entï¿½o cabeca e cauda sï¿½o NULL
         cabeca = NULL;
         cauda = NULL;
     }
 
     ListaEnc(int v)
     {
-        // se passar elemento, então cria novo No
+        // se passar elemento, entï¿½o cria novo No
         cabeca = new No(v);
         cauda = cabeca;
     }
@@ -80,14 +80,14 @@ public:
         {
             while(c) // percorre a ListaEnc
             {
-                cout << c->obterValor() << endl;
+                cout <<"|" << c->obterValor() << endl;
                 c = c->obterProx();
             }
             cout << endl;
         }
     }
 
-    bool vazia() // verifica se a ListaEnc está vazia
+    bool vazia() // verifica se a ListaEnc estï¿½ vazia
     {
         if(cabeca == NULL)
             return true;
@@ -97,7 +97,7 @@ public:
         }
     }
 
-    //retorna elemento da posição x
+    //retorna elemento da posiï¿½ï¿½o x
     int get(int x)
     {
         No* c = cabeca;
@@ -125,7 +125,7 @@ public:
         }
         c->setPeso(x);
     }
-    // insere no início (semelhante a push_front da list)
+    // insere no inï¿½cio (semelhante a push_front da list)
     void insereInicio(int v)
     {
         No* novo_no = new No(v);
@@ -162,7 +162,7 @@ public:
     // retorna o tamanho da ListaEnc
     int tamanho()
     {
-        if(vazia()) // se for vazia, entã retorna 0
+        if(vazia()) // se for vazia, entï¿½ retorna 0
             return 0;
 
         No* c = cabeca;
@@ -267,12 +267,12 @@ public:
 
     }
 
-    // remove da ListaEnc, remoção do final (semelhante a pop_back da list)
+    // remove da ListaEnc, remoï¿½ï¿½o do final (semelhante a pop_back da list)
     void remover()
     {
         if(!vazia())
         {
-            // se houver só 1 elemento
+            // se houver sï¿½ 1 elemento
             if(cabeca->obterProx() == NULL)
                 cabeca = NULL;
             else if(cabeca->obterProx()->obterProx() == NULL) // 2 elementos
@@ -290,7 +290,7 @@ public:
                     ant_ant = aux;
                     corrente = corrente->obterProx();
                 }
-                delete ant_ant->obterProx(); // libera memória
+                delete ant_ant->obterProx(); // libera memï¿½ria
                 ant_ant->setProx(NULL); // seta o prox como NULL
                 cauda = ant_ant; // atualiza a cauda
             }
