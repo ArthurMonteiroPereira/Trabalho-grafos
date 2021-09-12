@@ -1,0 +1,1 @@
+Custo da solucao com algoritmo guloso:12491 e levou:0.001segundos

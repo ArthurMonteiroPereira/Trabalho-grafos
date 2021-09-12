@@ -1,0 +1,7 @@
+Usar a seguinte linha para compilar:
+	g++ -O3 *.cpp* -o main -g 
+E para rodar usa-se o seguinte modelo:
+	./main <Arquivo de entrada> <Arquivo de saida>
+	EX:
+	./main 10att48.clu saida.txt
+	

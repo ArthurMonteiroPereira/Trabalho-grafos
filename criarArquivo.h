@@ -114,7 +114,7 @@ void determinaAresta(string text,int *dado1,int *dado2,int *dado3){
 */
 grafo* leituraArquivoNovo(string caminhoArquivo)
 {
-    cout << "Inicio leitura do arquivo" << endl;
+    cout << "Inicio leitura do arquivo"<< endl;
     string aux;
     int j;
     for (j = caminhoArquivo.size()-1; caminhoArquivo[j] != '\\' && caminhoArquivo[j] !='/' && j!=-1; j--){

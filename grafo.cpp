@@ -835,6 +835,7 @@ int grafo::getXgrupoY(int x,int y){
 }
 int  grafo::aGM()
 {
+    
     int status;
     
     int custoSol = 0;
@@ -902,11 +903,12 @@ int  grafo::aGM()
         status++;
     }
     //cout << "Custo da solucao com algoritmo guloso:" << custoSol << endl;
+    
     return custoSol;
 }
 float  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES CANDIDATOS
 {
-    cout << "iniciando randomizado..."<<endl;
+    //cout << "iniciando randomizado..."<<endl;
     int status = 0;
     int seletor = 0;
     int aux = -1;
@@ -1066,7 +1068,7 @@ float  grafo::aGMRand(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTIC
 }
 float  grafo::aGMRand2(float alfa) ///////////// FALTA LCR PRA GUARDAR OS VÉRTICES CANDIDATOS
 {
-    cout << "iniciando randomizado..."<<endl;
+    //cout << "iniciando randomizado..."<<endl;
     int status = 0;
     int seletor = 0;
     int aux = -1;
